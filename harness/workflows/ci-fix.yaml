@@ -1,0 +1,28 @@
+name: ci-fix
+description: 测试驱动 Loop — CI/verify 失败时诊断修复
+version: 1
+
+trigger:
+  type: manual
+  signals: [verify_fail, ci_fail]
+
+steps:
+  - id: diagnose
+    skill: explorer
+    manifest: ci-fix
+    description: 读失败日志，定位文件
+
+  - id: fix
+    skill: implementer
+    manifest: round-action
+    description: 最小修复
+
+  - id: verify
+    skill: tester
+    manifest: round-close
+    description: 重跑 verify 直到通过
+
+goal:
+  success_condition: "pnpm verify exit 0"
+  max_iterations: 10
+  checker: reviewer

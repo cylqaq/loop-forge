@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "beforeAgentStart": [
+      {
+        "name": "read-documentation",
+        "command": "node scripts/before-start.mjs",
+        "description": "检查关键文档存在"
+      }
+    ],
+    "beforeCommit": [
+      {
+        "name": "verify",
+        "command": "node scripts/verify.mjs",
+        "description": "提交前验证"
+      }
+    ]
+  }
+}

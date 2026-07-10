@@ -1,0 +1,38 @@
+name: round-cycle
+description: Loop 外循环标准链 — Intent 到 Adjustment 五阶段
+version: 1
+
+steps:
+  - id: intent
+    skill: loop-orchestrator
+    manifest: round-start
+    phase: 00-intent
+    description: 读 CURRENT，确认窄目标与验收
+
+  - id: context
+    skill: navigator
+    manifest: round-start
+    phase: 01-context
+    description: INDEX 导航，输出 context-plan
+
+  - id: action
+    skill: implementer
+    manifest: round-action
+    phase: 02-action
+    description: 实现变更
+
+  - id: observe
+    skill: tester
+    manifest: round-close
+    phase: 03-observation
+    description: 跑 verify/smoke
+
+  - id: adjust
+    skill: loop-orchestrator
+    manifest: round-close
+    phase: 04-adjustment
+    description: 更新 CURRENT、DECISIONS、loop-state
+
+handoff:
+  protocol: one_skill_per_session
+  complete_command: loop handoff complete

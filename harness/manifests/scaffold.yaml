@@ -1,0 +1,18 @@
+task: scaffold
+description: 子项目孵化
+
+before:
+  - path: docs/ops/root-project-protection.md
+    priority: critical
+  - path: projects/_template/README.md
+    priority: critical
+  - path: docs/ops/github-setup.md
+    priority: medium
+
+during_write:
+  - projects/{target_id}/**
+  - "{external_path}/**"
+
+skills:
+  - project-scaffold
+  - implementer

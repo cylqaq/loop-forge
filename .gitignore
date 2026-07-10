@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+*.log
+state/loop-state.json
+state/*.local.json
+state/DAILY_TRIAGE.md
+.cursor/mcp.json
+# 孵化的子项目（保留 _template）
+projects/**
+!projects/_template/
+!projects/_template/**
+.env
+.env.*
+!.env.example

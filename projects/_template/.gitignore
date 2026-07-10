@@ -1,0 +1,4 @@
+node_modules/
+state/loop-state.json
+.env
+.cursor/mcp.json

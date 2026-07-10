@@ -1,0 +1,18 @@
+task: round-action
+description: 实现阶段读写清单
+
+before:
+  - path: docs/harness/agent-routing.md
+    priority: high
+  - path: docs/harness/execution/phases/02-action.md
+    priority: high
+
+during_write:
+  - "{project_root}/**"
+
+skills:
+  - implementer
+
+validators:
+  - name: no_git_config_change
+    rule: never_run_git_config

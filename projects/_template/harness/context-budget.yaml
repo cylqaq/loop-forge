@@ -1,0 +1,41 @@
+# 上下文预算与 Loop 安全栓
+
+version: 1
+
+total_budget_kb: 60
+hard_total_cap_kb: 72
+warn_at_ratio: 0.85
+
+navigation_first: true
+nav_index_files:
+  - projects/_template/INDEX.yaml
+nav_total_cap_kb: 6
+
+priorities:
+  critical:
+    description: AGENTS.md、CURRENT.md、活跃 manifest — 永不裁剪
+    max_kb: 30
+  high:
+    description: ARCHITECTURE、LOOP_ENGINEERING、活跃 workflow
+    max_kb: 20
+  medium:
+    description: 按需加载的 L3 长文
+    max_kb: 16
+    source: on_demand
+  low:
+    description: 历史轮次、参考链接
+    max_kb: 2
+    source: on_demand
+
+loop_safety:
+  max_rounds_per_session: 3
+  max_iterations: 10
+  consecutive_verify_fail: 3
+  empty_loop_guard_minutes: 30
+  stall_rounds: 3
+
+degradation:
+  strategy: priority_cascade
+  circuit_breaker:
+    yellow_ratio: 0.85
+    red_ratio: 1.0

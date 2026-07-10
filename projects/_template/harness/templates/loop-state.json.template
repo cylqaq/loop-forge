@@ -1,0 +1,15 @@
+{
+  "currentRound": 1,
+  "currentIteration": 0,
+  "maxIterations": 10,
+  "status": "idle",
+  "goal": "",
+  "consecutiveVerifyFail": 0,
+  "history": [],
+  "handoff": {
+    "workflow": "round-cycle",
+    "stepIndex": 0,
+    "activeSkill": null
+  },
+  "lastUpdated": null
+}

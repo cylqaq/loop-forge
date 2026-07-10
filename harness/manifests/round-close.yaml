@@ -1,0 +1,23 @@
+task: round-close
+description: 观察与调整阶段
+
+before:
+  - path: docs/harness/execution/phases/03-observation.md
+    priority: critical
+  - path: docs/harness/execution/phases/04-adjustment.md
+    priority: critical
+  - path: REVIEW_PROMPT.md
+    priority: high
+
+postflight:
+  - command: pnpm verify
+  - command: pnpm smoke:all
+
+after_must_update:
+  - docs/upgrade-plans/CURRENT.md
+  - state/loop-state.json
+
+skills:
+  - tester
+  - reviewer
+  - loop-orchestrator

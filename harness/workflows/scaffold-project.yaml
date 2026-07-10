@@ -1,0 +1,19 @@
+name: scaffold-project
+description: 从 _template 孵化子项目
+version: 1
+
+steps:
+  - id: plan
+    skill: project-scaffold
+    manifest: scaffold
+    description: 确认目标路径与项目名
+
+  - id: copy
+    skill: implementer
+    manifest: scaffold
+    description: 复制模板并 init
+
+  - id: verify
+    skill: tester
+    manifest: round-close
+    description: 子项目 smoke

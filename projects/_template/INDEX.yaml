@@ -1,0 +1,15 @@
+# 导航 INDEX（L0 · ≤6KB）
+
+canon:
+  - path: AGENTS.md
+    summary: Agent 铁律入口
+  - path: docs/upgrade-plans/CURRENT.md
+    summary: 当前迭代窗口
+
+harness:
+  - path: harness/workflows/round-cycle.yaml
+    summary: 默认外循环
+
+skills:
+  - loop-orchestrator
+  - implementer

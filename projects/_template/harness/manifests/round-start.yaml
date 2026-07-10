@@ -1,0 +1,18 @@
+task: round-start
+description: 轮次开始 — Intent + Context
+
+before:
+  - path: AGENTS.md
+    priority: critical
+  - path: docs/upgrade-plans/CURRENT.md
+    priority: critical
+  - path: docs/ARCHITECTURE.md
+    priority: high
+  - path: docs/LOOP_ENGINEERING.md
+    priority: high
+  - path: docs/harness/layer-sync-contract.md
+    priority: medium
+
+skills:
+  - loop-orchestrator
+  - navigator

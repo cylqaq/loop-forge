@@ -1,0 +1,9 @@
+task: ci-fix
+description: CI/verify 失败诊断
+
+before:
+  - path: docs/harness/execution/phases/03-observation.md
+    priority: critical
+
+skills:
+  - explorer
