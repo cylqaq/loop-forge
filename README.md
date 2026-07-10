@@ -66,4 +66,7 @@ pnpm loop init
 - [Loop Engineering 完全指南](https://muximxc.github.io/loop-engineering-guide/)
 ## 当前状态
 
-**Round 1（骨架搭建）** — 见 [`docs/upgrade-plans/CURRENT.md`](./docs/upgrade-plans/CURRENT.md)
+**Round 2 完成** — 见 [`docs/upgrade-plans/CURRENT.md`](./docs/upgrade-plans/CURRENT.md)
+
+- 仓库：https://github.com/cylqaq/loop-forge
+- 分支：`main`（稳定）· `develop`（日常迭代）· `round/*`（单轮特性）
