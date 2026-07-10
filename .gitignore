@@ -3,6 +3,7 @@ node_modules/
 *.log
 state/loop-state.json
 state/*.local.json
+state/scaffold-plan.yaml
 state/DAILY_TRIAGE.md
 .cursor/mcp.json
 # 孵化的子项目（保留 _template）

@@ -1,0 +1,6 @@
+# Loop Forge 孵化标记（由 loop init 写入）
+mother_repo: ""
+project_id: ""
+external: false
+scaffolded_at: ""
+template_path: projects/_template

@@ -96,12 +96,26 @@ Perceive → Reason → Act → Observe → (repeat)
 
 ## 7. 子项目孵化模型
 
-1. 复制 `projects/_template/` → 目标路径
-2. 执行 `pnpm loop init` 写入项目元数据
-3. 在子项目 `AGENTS.md` 覆盖领域铁律
-4. 添加领域 Skills 到 `.cursor/skills/`
-5. 配置 MCP（从 `mcp.json.template`）
-6. **后续迭代只在子项目进行**，母版仅回流通用改进
+### 7.1 双模式路径
+
+| 模式 | CLI | 路径 | Git |
+|------|-----|------|-----|
+| **内部** | `loop init projects/<id> <id>` | 母版 `projects/`（gitignore） | 可选 `--git` |
+| **外部** | `loop init --external <path> <id> --git` | 母版外任意空目录 | 推荐 `--git` |
+
+### 7.2 孵化步骤
+
+1. `pnpm loop sync-template`（可选，拉齐模板）
+2. `pnpm loop init [--external] ...`
+3. 子项目覆盖 `AGENTS.md`、领域 Skills
+4. 配置 MCP（`mcp.json.template`）
+5. **后续迭代只在子项目**；母版仅回流通用 harness
+
+### 7.3 追溯标记
+
+每个子项目含 `.loop-forge-origin.yaml`（mother_repo / project_id / external）。
+
+详见 `docs/ops/external-project-lifecycle.md`、`docs/harness/execution/phases/05-scaffold.md`。
 
 ## 8. 五种 Loop 模式（可选用）
 
@@ -124,7 +138,15 @@ Perceive → Reason → Act → Observe → (repeat)
 | 3 半自动 | 开 Draft PR、通知 | 审查 PR，手动 merge |
 | 4 全自动 | Maker+Checker，CI 后合并 | 异常介入、定期审计 |
 
-**Round 3：阶段 1–2 成熟** — init 一键就绪 + L3 编排 smoke 全绿。
+**Round 5 落地（阶段 2→3）**
+
+| 能力 | 实现 |
+|------|------|
+| 阶段 1 只读 | `@daily-triage` + MCP GitHub read |
+| 阶段 2 草稿 | `ci-fix` workflow |
+| 阶段 3 半自动 | `@pr-draft` + `docs/ops/mcp-pr-draft-flow.md` |
+| 外部孵化 | `loop init --external` + `scaffold-project` v2 |
+| L4 蓝图 | `docs/ops/cursor-sdk.md`（Round 6 可执行） |
 
 ## 10. 关键边界
 

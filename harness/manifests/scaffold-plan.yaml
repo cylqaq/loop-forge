@@ -1,0 +1,24 @@
+task: scaffold-plan
+description: 孵化规划 — Intent 阶段
+
+before:
+  - path: docs/ops/root-project-protection.md
+    priority: critical
+  - path: docs/ops/external-project-lifecycle.md
+    priority: critical
+  - path: docs/ARCHITECTURE.md
+    priority: high
+  - path: projects/_template/README.md
+    priority: high
+  - path: docs/harness/execution/phases/05-scaffold.md
+    priority: high
+
+during_write:
+  - state/scaffold-plan.yaml
+
+skills:
+  - project-scaffold
+
+validators:
+  - name: path_decision
+    rule: must_document_internal_vs_external

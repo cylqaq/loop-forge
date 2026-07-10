@@ -1,44 +1,47 @@
-# CURRENT · Round 4 完成
+# CURRENT · Round 5 完成
 
 > 单窗口迭代：**上轮摘要 + 下轮占位**。
 
 ## 上轮摘要
 
-**Round 4 · 2026-07-10 · MCP Triage + ci-fix + sync-template**
+**Round 5 · 2026-07-10 · 外部孵化 + scaffold v2 + 阶段 3 PR**
 
-- MCP GitHub 只读实战：`docs/ops/mcp-github-triage.md` + `.env.example`
-- Skill `@daily-triage`（阶段 1 只读 Triage Loop）
-- `.cursor/automations.example.json` 导出 4 个 Automation 示例
-- `pnpm loop sync-template` + `sync-manifest.yaml`
-- `pnpm loop workflow list|use <name>` 切换 handoff workflow
-- smoke：`ci-fix` handoff 链 + `sync-template`
-- 标签 **v0.3.0**
+- `pnpm loop init --external <path> <id> [--git]`：母版外独立仓库孵化（`init-lib.mjs`）
+- `.loop-forge-origin.yaml` 追溯标记；外部路径不得落在 `projects/` 内
+- `scaffold-project` workflow **v2 四步**：plan → copy → verify → adjust
+- Manifest 拆分：`scaffold-plan` / `scaffold-exec` / `scaffold-close`（原 `scaffold.yaml` DEPRECATED）
+- `@project-scaffold` 重写（决策表 + plan 产出）；`@pr-draft` 阶段 3（`disable-model-invocation: true`）
+- 文档：`05-scaffold.md`、`external-project-lifecycle.md`、`mcp-pr-draft-flow.md`、`cursor-sdk.md`（L4 蓝图）
+- smoke：`scaffold-project` 链 + `external-init` 全绿；review 规则 `workflow-goal`
+- 标签 **v0.4.0**
 - **验证**：`pnpm verify` exit 0 ✅
 
-## 下轮占位 · Round 5
+## 下轮占位 · Round 6
 
 ### 目标
 
-阶段 2→3 过渡：MCP 写操作审批流；子项目独立仓库孵化 CLI；L4 SDK 占位。
+L4 SDK 落地：Cursor SDK 最小闭环 + Automations API 占位实现；阶段 3 PR smoke（mock/gh）。
 
 ### 拟措施
 
-1. `harness/workflows/scaffold-project.yaml` 端到端 smoke
-2. MCP PR draft 流程文档（阶段 3，须人工 merge）
-3. `pnpm loop init --external <path>` 复制到母版外路径
-4. `docs/ops/cursor-sdk.md` L4 占位
+1. `docs/ops/cursor-sdk.md` → 可运行 `@cursor/sdk` hello-agent 脚本
+2. `harness/scripts/smoke-pr-draft.mjs`（dry-run / gh skip 模式）
+3. `.cursor/automations.example.json` 导出 pr-draft automation
+4. MCP GitHub write scope 审批清单与 `.env.example` 对齐
 
 ### 验收标准
 
 ```bash
 pnpm verify
 pnpm loop workflow validate
-pnpm loop init --external ../my-standalone my-standalone
+node harness/scripts/smoke-pr-draft.mjs --dry-run
 ```
 
 ---
 
 ## 历史
+
+### Round 4 · MCP Triage + ci-fix + sync-template · v0.3.0
 
 ### Round 3 · init + skill-author · v0.2.0
 

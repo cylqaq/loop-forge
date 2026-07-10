@@ -65,4 +65,10 @@ execSync('node harness/scripts/smoke-ci-fix.mjs', { cwd: ROOT, stdio: 'inherit' 
 console.log('=== smoke: sync-template ===');
 execSync('node harness/scripts/smoke-sync-template.mjs', { cwd: ROOT, stdio: 'inherit' });
 
+console.log('=== smoke: scaffold-project ===');
+execSync('node harness/scripts/smoke-scaffold-project.mjs', { cwd: ROOT, stdio: 'inherit' });
+
+console.log('=== smoke: external-init ===');
+execSync('node harness/scripts/smoke-external-init.mjs', { cwd: ROOT, stdio: 'inherit' });
+
 console.log('\n✓ smoke:all passed');

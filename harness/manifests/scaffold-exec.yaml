@@ -1,0 +1,21 @@
+task: scaffold-exec
+description: 孵化执行 — Action 阶段
+
+before:
+  - path: docs/harness/execution/phases/05-scaffold.md
+    priority: critical
+  - path: state/scaffold-plan.yaml
+    priority: critical
+
+during_write:
+  - projects/{target_id}/**
+  - "{external_path}/**"
+  - .loop-forge-origin.yaml
+
+postflight:
+  - command: node harness/scripts/loop.mjs doctor
+    cwd: "{target_root}"
+
+skills:
+  - implementer
+  - project-scaffold

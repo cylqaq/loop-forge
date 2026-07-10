@@ -130,3 +130,39 @@
 - **影响**：`docs/ops/mcp-github-triage.md`、`.cursor/automations.example.json`
 - **锚点**：`docs/MCP_INTEGRATION.md`
 
+## D-015 · 双模式 init（内部 / 外部）
+
+- **日期**：2026-07-10 · Round 5
+- **问题**：子项目是否必须落在母版 `projects/` 下？
+- **决策**：`loop init` 支持 `--external <abs-path>`；外部路径禁止在 `projects/` 内；写入 `.loop-forge-origin.yaml` 追溯母版。
+- **理由**：独立 Git 仓库与母版解耦；架构 §7 双模式孵化。
+- **影响**：`harness/scripts/init-lib.mjs`、`smoke-external-init.mjs`、`docs/ops/external-project-lifecycle.md`
+- **锚点**：`docs/ARCHITECTURE.md` §7
+
+## D-016 · scaffold-project workflow v2（四步）
+
+- **日期**：2026-07-10 · Round 5
+- **问题**：单 manifest 无法表达 plan/exec/close 三阶段语义？
+- **决策**：workflow 四步 plan→copy→verify→adjust；manifest 拆为 `scaffold-plan` / `scaffold-exec` / `scaffold-close`；原 `scaffold.yaml` 标记 DEPRECATED 保留兼容。
+- **理由**：五层契约 L2/L3 解耦；每步 skill/manifest 可独立演进与 smoke。
+- **影响**：`harness/workflows/scaffold-project.yaml`、`smoke-scaffold-project.mjs`、`docs/harness/execution/phases/05-scaffold.md`
+- **锚点**：`docs/harness/layer-sync-contract.md`
+
+## D-017 · 阶段 3 PR Draft 半自动 + 人工 merge
+
+- **日期**：2026-07-10 · Round 5
+- **问题**：verify 通过后如何安全进入 MCP 写操作？
+- **决策**：`@pr-draft` Skill（`disable-model-invocation: true`）+ 8 步编排；须 Reviewer APPROVED + 用户显式批准 push；禁止自动 merge。
+- **理由**：架构 §9 阶段 2→3 过渡；Maker-Checker 与最小写权限。
+- **影响**：`.cursor/skills/pr-draft/`、`docs/ops/mcp-pr-draft-flow.md`
+- **锚点**：`docs/ARCHITECTURE.md` §9
+
+## D-018 · L4 Cursor SDK 蓝图占位
+
+- **日期**：2026-07-10 · Round 5
+- **问题**：SDK/Automations API 何时落地？
+- **决策**：Round 5 仅 `docs/ops/cursor-sdk.md` 蓝图与 `.env.example` 预留变量；Round 6 实现可运行 hello-agent。
+- **理由**：L4 执行文档先于可执行脚本；避免半成品 SDK 进入 verify 链。
+- **影响**：`docs/ops/cursor-sdk.md`、Round 6 占位
+- **锚点**：`docs/LOOP_ENGINEERING.md` L4 行
+

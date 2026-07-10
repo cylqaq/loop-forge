@@ -13,6 +13,9 @@
 | `docs/**` | `DOCUMENTATION_STANDARDS.md` | `@navigator` |
 | `docs/upgrade-plans/**` | `CURRENT.md` | `@loop-orchestrator` |
 | `projects/_template/**` | `ops/root-project-protection.md` | `@project-scaffold` |
+| `harness/scripts/init-lib.mjs` | `external-project-lifecycle.md` | `@project-scaffold` |
+| `docs/ops/mcp-pr-draft-flow.md` | `ARCHITECTURE.md` §9 | `@pr-draft` |
+| `docs/ops/cursor-sdk.md` | `LOOP_ENGINEERING.md` L4 | `@loop-orchestrator` |
 | `projects/*/`（非模板） | 子项目 `AGENTS.md` | `@domain-web-app` 或子项目 Skill |
 | `scripts/verify.mjs` | `ARCHITECTURE.md` §验证 | `@tester` |
 | `state/**` | `DECISIONS.md` D-008 | `@loop-orchestrator` |

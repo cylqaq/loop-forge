@@ -32,6 +32,14 @@ pnpm verify
 - [ ] 对应 Skill「工作流位置」已更新
 - [ ] `docs/harness/execution/` 相关 phase
 - [ ] `skills/README.md` 链式表
+- [ ] 含 `goal.success_condition` 的 workflow 被 `workflow-goal` review 覆盖
+
+### 改了 `scaffold-project` 或 init 相关
+
+- [ ] `harness/manifests/scaffold-{plan,exec,close}.yaml` 与 workflow 四步对齐
+- [ ] `init-lib.mjs` 在 `sync-manifest.yaml` 中
+- [ ] `smoke:scaffold` + `smoke:external` 通过
+- [ ] `docs/ops/external-project-lifecycle.md` 与 CLI 一致
 
 ### 改了 `skills/roles/*/SKILL.md`
 

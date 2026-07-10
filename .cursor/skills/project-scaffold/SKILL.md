@@ -1,22 +1,56 @@
 ---
 name: project-scaffold
-description: 从 projects/_template 孵化子项目。涉及新建具体项目、复制模板、init 时加载。
+description: >-
+  Scaffolds self-contained sub-projects from projects/_template via loop init
+  or init --external. Use when creating projects, external repos, spawn, or
+  scaffold-project workflow plan step.
 ---
 
 # Project Scaffold Skill
 
-## 流程
+> 架构 §7 · Phase 05 · workflow `scaffold-project` step `plan`
 
-1. 读 `docs/ops/root-project-protection.md`
-2. 确认目标路径（不在母版根堆业务）
-3. `pnpm loop init <path>` 或手动复制 `projects/_template`
-4. 子项目内覆盖 `AGENTS.md`、配置 `mcp.json`
-5. 个人 GitHub：`docs/ops/github-setup.md`
+## BEFORE（必读）
 
-## 子项目须自包含
+1. `docs/ops/root-project-protection.md`
+2. `docs/ops/external-project-lifecycle.md`
+3. `docs/harness/execution/phases/05-scaffold.md`
+4. `docs/ARCHITECTURE.md` §7
 
-- `AGENTS.md`、`harness/`、`skills/`、`docs/` 副本或 symlink 说明
+## 决策表
+
+| 条件 | 命令 |
+|------|------|
+| 母版内试验 | `pnpm loop init projects/<id> <id>` |
+| 独立仓库/生产 | `pnpm loop init --external <abs-path> <id> --git` |
+| CI 快速复制 | 加 `--skip-install` |
+
+## Intent 产出
+
+写入 `state/scaffold-plan.yaml`（本地，gitignore）：
+
+```yaml
+project_id: my-app
+mode: external   # internal | external
+target_path: e:/my-project/my-app
+init_git: true
+acceptance: npm run verify exit 0
+```
+
+## DURING
+
+**本会话只规划** — 复制由 implementer 在下一步执行。
+
+## AFTER
+
+handoff → `@implementer` 执行 init。
 
 ## 验收
 
-子项目 `pnpm verify` 通过（若已配置）
+- `.loop-forge-origin.yaml` 存在
+- 子项目 `npm run verify` exit 0
+
+## NEVER
+
+- 母版根目录创建 `apps/`
+- `--external` 指向 `projects/` 内

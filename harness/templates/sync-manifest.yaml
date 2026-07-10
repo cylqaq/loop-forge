@@ -4,6 +4,7 @@
 files:
   - harness/scripts/loop.mjs
   - harness/scripts/loop-lib.mjs
+  - harness/scripts/init-lib.mjs
   - harness/context-budget.yaml
   - harness/workflows/round-cycle.yaml
   - harness/manifests/round-start.yaml

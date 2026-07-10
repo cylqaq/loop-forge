@@ -1,0 +1,20 @@
+task: scaffold-close
+description: 孵化验收 — Observation 阶段
+
+before:
+  - path: docs/harness/execution/phases/03-observation.md
+    priority: critical
+
+postflight:
+  - command: npm run verify
+    cwd: "{target_root}"
+
+after_must_exist:
+  - "{target_root}/.loop-forge-origin.yaml"
+  - "{target_root}/AGENTS.md"
+  - "{target_root}/project.yaml"
+  - "{target_root}/harness/workflows/round-cycle.yaml"
+
+skills:
+  - tester
+  - reviewer

@@ -10,6 +10,8 @@
     "smoke:all": "node harness/scripts/smoke-all.mjs",
     "smoke:init": "node harness/scripts/smoke-init.mjs",
     "smoke:ci-fix": "node harness/scripts/smoke-ci-fix.mjs",
+    "smoke:scaffold": "node harness/scripts/smoke-scaffold-project.mjs",
+    "smoke:external": "node harness/scripts/smoke-external-init.mjs",
     "sync-template": "node harness/scripts/sync-template.mjs",
     "doctor": "node harness/scripts/loop.mjs doctor",
     "worktree": "node harness/scripts/worktree.mjs",

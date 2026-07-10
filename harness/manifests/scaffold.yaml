@@ -1,17 +1,16 @@
+# 保留兼容 — 指向 scaffold-plan
+# 新 workflow 使用 scaffold-plan / scaffold-exec / scaffold-close
+
 task: scaffold
-description: 子项目孵化
+description: "DEPRECATED: use scaffold-plan"
 
 before:
   - path: docs/ops/root-project-protection.md
     priority: critical
+  - path: docs/ops/external-project-lifecycle.md
+    priority: critical
   - path: projects/_template/README.md
     priority: critical
-  - path: docs/ops/github-setup.md
-    priority: medium
-
-during_write:
-  - projects/{target_id}/**
-  - "{external_path}/**"
 
 skills:
   - project-scaffold

@@ -13,7 +13,7 @@ import {
   completeHandoff,
   loadWorkflows,
 } from './loop-lib.mjs';
-import { existsSync, mkdirSync, cpSync } from 'node:fs';
+import { parseInitArgs, runInit } from './init-lib.mjs';
 import { join } from 'node:path';
 
 const [, , cmd, ...args] = process.argv;
@@ -101,47 +101,22 @@ async function main() {
     }
 
     case 'init': {
-      const target = args[0] || 'projects/my-project';
-      const skipInstall = args.includes('--skip-install');
       const template = join(ROOT, 'projects/_template');
-      const dest = target.startsWith('/') || /^[A-Za-z]:/.test(target)
-        ? target
-        : join(ROOT, target);
+      const { existsSync } = await import('node:fs');
       if (!existsSync(template)) {
         console.error('Template not found');
         process.exit(1);
       }
-      mkdirSync(dest, { recursive: true });
-      cpSync(template, dest, { recursive: true });
-      const projYaml = join(dest, 'project.yaml');
-      const idArg = args.find((a) => !a.startsWith('--') && a !== target);
-      if (existsSync(projYaml)) {
-        const { readFileSync, writeFileSync } = await import('node:fs');
-        const id = idArg || target.split(/[/\\]/).filter(Boolean).pop() || 'my-project';
-        let y = readFileSync(projYaml, 'utf8');
-        y = y.replace(/^id:.*$/m, `id: ${id}`);
-        const name = id.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-        y = y.replace(/^name:.*$/m, `name: ${name}`);
-        writeFileSync(projYaml, y);
-        const pkgPath = join(dest, 'package.json');
-        if (existsSync(pkgPath)) {
-          let pkg = readFileSync(pkgPath, 'utf8');
-          pkg = pkg.replace('"{{project-id}}"', `"${id}"`);
-          writeFileSync(pkgPath, pkg);
-        }
-      }
-      console.log(`Scaffolded to ${dest}`);
-
-      if (!skipInstall) {
-        const { execSync } = await import('node:child_process');
-        console.log('\n=== Post-init: npm install ===');
-        execSync('npm install', { cwd: dest, stdio: 'inherit' });
-        console.log('\n=== Post-init: doctor ===');
-        execSync('node harness/scripts/loop.mjs doctor', { cwd: dest, stdio: 'inherit' });
-        console.log('\n=== Post-init OK ===');
-      } else {
-        console.log('Skipped install (--skip-install). Run: npm install && npm run doctor');
-      }
+      const p = parseInitArgs(process.argv.slice(3), ROOT);
+      runInit({
+        dest: p.dest,
+        id: p.id,
+        root: ROOT,
+        template,
+        skipInstall: p.skipInstall,
+        initGit: p.initGit,
+        external: p.external,
+      });
       break;
     }
 
@@ -168,7 +143,9 @@ Commands:
   workflow list       List workflows
   workflow use <name> Switch active handoff workflow
   manifest <name>     Show manifest
-  init [path] [id]    Copy _template (--skip-install)
+  init [path] [id]              Internal scaffold (projects/)
+  init --external <path> [id]   External scaffold (outside projects/)
+                                  Flags: --git --skip-install
   review              Zero-LLM rule review
   sync-template       Sync harness → projects/_template
 `);

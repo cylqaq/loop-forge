@@ -1,19 +1,43 @@
 name: scaffold-project
-description: 从 _template 孵化子项目
-version: 1
+description: 从 _template 孵化子项目（内部或外部路径）
+version: 2
+
+trigger:
+  type: manual
+  signals: [new_project, external_scaffold]
+
+phases:
+  - 05-scaffold
 
 steps:
   - id: plan
     skill: project-scaffold
-    manifest: scaffold
-    description: 确认目标路径与项目名
+    manifest: scaffold-plan
+    phase: 00-intent
+    description: Intent — 确认 id、路径（internal/external）、Git 策略
 
   - id: copy
     skill: implementer
-    manifest: scaffold
-    description: 复制模板并 init
+    manifest: scaffold-exec
+    phase: 02-action
+    description: Action — loop init / init --external --git
 
   - id: verify
     skill: tester
+    manifest: scaffold-close
+    phase: 03-observation
+    description: Observation — 子项目 verify + doctor
+
+  - id: adjust
+    skill: loop-orchestrator
     manifest: round-close
-    description: 子项目 smoke
+    phase: 04-adjustment
+    description: Adjustment — 更新子项目 CURRENT、母版 DECISIONS（若回流）
+
+goal:
+  success_condition: "sub-project npm run verify exit 0 AND .loop-forge-origin.yaml exists"
+  max_iterations: 3
+  checker: reviewer
+
+handoff:
+  protocol: one_skill_per_session
