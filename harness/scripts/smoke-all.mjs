@@ -56,4 +56,7 @@ console.log('=== smoke: CLI ===');
 execSync('node harness/scripts/loop.mjs doctor', { cwd: ROOT, stdio: 'pipe' });
 execSync('node harness/scripts/loop.mjs workflow validate', { cwd: ROOT, stdio: 'pipe' });
 
+console.log('=== smoke: init (full) ===');
+execSync('node harness/scripts/smoke-init.mjs', { cwd: ROOT, stdio: 'inherit' });
+
 console.log('\n✓ smoke:all passed');

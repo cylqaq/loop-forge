@@ -7,6 +7,8 @@
 | Addy Osmani · Loop Engineering | https://addyo.substack.com/ (概念推广) |
 | Cursor Agent 文档 | https://docs.cursor.com |
 | MCP 协议 | https://modelcontextprotocol.io |
+| Agent Skills 标准 | https://agentskills.io |
+| Cursor Skills 文档 | https://cursor.com/docs/skills |
 
 ## 本仓库落地映射
 

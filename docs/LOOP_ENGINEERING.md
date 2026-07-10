@@ -160,8 +160,8 @@ Loop Engineering 能力之一：**一轮做不完，用文档设计下轮**。
 |------|------|-------------|
 | L1 基础循环 | `/loop` + 状态 + verify | Round 1 ✅ |
 | L2 自动化 | Hooks + smoke CI | Round 1 ✅ |
-| L3 编排 | workflow + manifest CLI | Round 1 骨架，Round 2 充实 |
-| L4 SDK/云端 | `@cursor/sdk`、Automations | Round 3+ |
+| L3 编排 | workflow + manifest CLI | Round 1–3 ✅ |
+| L4 SDK/云端 | `@cursor/sdk`、Automations | Round 4+ |
 
 ## 9. 三大风险（必读）
 

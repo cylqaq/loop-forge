@@ -1,47 +1,51 @@
-# CURRENT · Round 2 完成
+# CURRENT · Round 3 完成
 
 > 单窗口迭代：**上轮摘要 + 下轮占位**。
 
 ## 上轮摘要
 
-**Round 2 · 2026-07-10 · 模板充实 + Git 标准化**
+**Round 3 · 2026-07-10 · init 自动化 + 元技能 + 领域示例**
 
-- `projects/_template/` 自包含 harness/scripts/workflows/manifests/docs
-- 零 LLM 评审：`harness/review/rules/` + `pnpm loop review`
-- Automations 文档：`docs/ops/cursor-automations.md`
-- Git 分支策略：`main` + `develop` + `round/*`（`docs/ops/branch-strategy.md`）
-- 远程：`https://github.com/cylqaq/loop-forge.git` 首次推送
-- **验证**：`pnpm verify` exit 0；`loop init` 冒烟通过
+- `loop init` post-hook：自动 `npm install` + `doctor`（`--skip-install` 可跳过）
+- `smoke-init.mjs` 纳入 `pnpm smoke:all` / `pnpm verify`
+- 元技能 `@skill-author`（Agent Skills 标准 + references + validate 脚本）
+- 领域示例 `@domain-web-app`（全栈孵化模板）
+- review 扩展：`current-has-next`、`skills-structure`
+- 子模板补 `docs/harness/` 精简副本
+- 标签 **v0.2.0** 发布 main
+- **验证**：`pnpm verify` exit 0 ✅
 
-## 下轮占位 · Round 3
+## 下轮占位 · Round 4
 
 ### 目标
 
-子模板完整 docs 副本可选化；`harness/review` 扩展；子项目 init 后自动 `pnpm install`。
+MCP GitHub 只读接入实战；`ci-fix` workflow 端到端；子项目 sync 母版 harness 脚本。
 
 ### 拟措施
 
-1. `loop init` post-hook：`npm install` + `doctor`
-2. 模板 `docs/harness/` 精简副本
-3. `round/3-*` 分支开发新领域 Skill 示例
-4. 标签 `v0.2.0` 发布 main
+1. 文档化 MCP 个人 Token 配置步骤（只读 Triage Loop）
+2. `harness/workflows/ci-fix.yaml` smoke 场景
+3. `pnpm loop sync-template` 将母版 harness 变更同步到 `_template`
+4. Cursor Automations 示例配置导出
 
 ### 验收标准
 
 ```bash
 pnpm verify
-pnpm loop init projects/smoke-test && cd projects/smoke-test && npm install && npm run verify
-# 清理 smoke-test
+pnpm loop workflow validate
+# ci-fix smoke 通过
 ```
+
+### 风险
+
+- MCP Token 需用户本地配置，不入库
 
 ---
 
 ## 历史
 
+### Round 2 · Git + review + 子模板
+
 ### Round 1 · 骨架
 
-六大积木 + 双 Harness + verify 全绿。
-
 ### Round 0 · 立项
-
-Loop Engineering 母版立项。

@@ -7,13 +7,12 @@
 | `harness/**` | `layer-sync-contract.md` | `@loop-orchestrator` |
 | `harness/workflows/**` | `ARCHITECTURE.md` §五层 | `@loop-orchestrator` |
 | `harness/manifests/**` | 对应 workflow | `@navigator` |
-| `.cursor/skills/**` | `LOOP_ENGINEERING.md` §Skills | `@skill-author` |
-| `.cursor/skills/skill-author/**` | `references/patterns.md` | `@skill-author` |
+| `.cursor/skills/**` | `LOOP_ENGINEERING.md` §Skills | `@loop-core` |
 | `.cursor/hooks.json` | `LOOP_ENGINEERING.md` §Automations | `@loop-core` |
 | `docs/**` | `DOCUMENTATION_STANDARDS.md` | `@navigator` |
 | `docs/upgrade-plans/**` | `CURRENT.md` | `@loop-orchestrator` |
 | `projects/_template/**` | `ops/root-project-protection.md` | `@project-scaffold` |
-| `projects/*/`（非模板） | 子项目 `AGENTS.md` | `@domain-web-app` 或子项目 Skill |
+| `projects/*/`（非模板） | 子项目 `AGENTS.md` | 子项目 Skill |
 | `scripts/verify.mjs` | `ARCHITECTURE.md` §验证 | `@tester` |
 | `state/**` | `DECISIONS.md` D-008 | `@loop-orchestrator` |
 

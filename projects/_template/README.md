@@ -1,15 +1,24 @@
 # 子项目模板
 
-从本目录复制以创建具体项目。复制后：
+从本目录复制，或使用母版命令：
 
-1. 改 `project.yaml` 中的 `id` 与 `name`
-2. 覆盖 `AGENTS.md` 领域铁律
-3. `pnpm loop init` 或手动调整
-4. 配置个人 GitHub：`docs/ops/github-setup.md`
+```bash
+pnpm loop init projects/my-app my-app
+# 自动：复制 → 替换 id → npm install → doctor
+```
 
 ## 自包含
 
-子项目应能脱离母版运行（harness/skills/docs 副本）。
+- `harness/` — round-cycle CLI
+- `docs/harness/` — 精简 Harness 地图
+- `.cursor/hooks.json`
+- `skills/guides/` — handoff 协议
+
+## 扩展领域 Skill
+
+1. 用 `@skill-author` 设计新 Skill
+2. 参考母版 `.cursor/skills/domain-web-app/`
+3. 写入子项目 `.cursor/skills/`
 
 ## INDEX
 

@@ -9,6 +9,8 @@
 | required-docs | `required-docs.mjs` | 关键文档存在 |
 | no-secrets | `no-secrets.mjs` |  staged 文件无密钥模式 |
 | workflow-align | `workflow-align.mjs` | L2↔L3 对齐 |
+| current-has-next | `current-has-next.mjs` | CURRENT 含下轮占位与验收 |
+| skills-structure | `skills-structure.mjs` | SKILL.md frontmatter 规范 |
 
 ## 用法
 

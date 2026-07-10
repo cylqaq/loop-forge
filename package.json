@@ -8,6 +8,7 @@
     "loop": "node harness/scripts/loop.mjs",
     "verify": "node scripts/verify.mjs",
     "smoke:all": "node harness/scripts/smoke-all.mjs",
+    "smoke:init": "node harness/scripts/smoke-init.mjs",
     "doctor": "node harness/scripts/loop.mjs doctor",
     "worktree": "node harness/scripts/worktree.mjs",
     "review": "node harness/review/run-review.mjs"

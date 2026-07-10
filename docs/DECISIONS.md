@@ -94,3 +94,21 @@
 - **影响**：`harness/review/run-review.mjs`
 - **锚点**：`harness/review/rules/README.md`
 
+## D-011 · loop init 一键就绪
+
+- **日期**：2026-07-10 · Round 3
+- **问题**：子项目 init 后仍需手动 install/doctor？
+- **决策**：`pnpm loop init` 默认 post-hook 执行 `npm install` + `doctor`；`--skip-install` 跳过。
+- **理由**：降低孵化摩擦；验证仍由 doctor/verify 客观判定。
+- **影响**：`harness/scripts/loop.mjs`、`smoke-init.mjs`
+- **锚点**：`projects/_template/README.md`
+
+## D-012 · skill-author 元技能
+
+- **日期**：2026-07-10 · Round 3
+- **问题**：如何标准化创建领域 Skill？
+- **决策**：母版内置 `@skill-author` 元技能，遵循 agentskills.io + 渐进披露；`skills-structure` review 规则校验 frontmatter。
+- **理由**：Skill 设计本身应是可复用 Loop 能力；description 即触发器。
+- **影响**：`.cursor/skills/skill-author/`、`domain-web-app` 示例
+- **锚点**：`.cursor/skills/skill-author/SKILL.md`
+

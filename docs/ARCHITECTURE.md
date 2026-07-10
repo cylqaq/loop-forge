@@ -124,7 +124,7 @@ Perceive → Reason → Act → Observe → (repeat)
 | 3 半自动 | 开 Draft PR、通知 | 审查 PR，手动 merge |
 | 4 全自动 | Maker+Checker，CI 后合并 | 异常介入、定期审计 |
 
-**Round 1 目标：阶段 1–2**（骨架 + 验证 + 文档）。
+**Round 3：阶段 1–2 成熟** — init 一键就绪 + L3 编排 smoke 全绿。
 
 ## 10. 关键边界
 
