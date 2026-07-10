@@ -1,51 +1,47 @@
-# CURRENT · Round 3 完成
+# CURRENT · Round 4 完成
 
 > 单窗口迭代：**上轮摘要 + 下轮占位**。
 
 ## 上轮摘要
 
-**Round 3 · 2026-07-10 · init 自动化 + 元技能 + 领域示例**
+**Round 4 · 2026-07-10 · MCP Triage + ci-fix + sync-template**
 
-- `loop init` post-hook：自动 `npm install` + `doctor`（`--skip-install` 可跳过）
-- `smoke-init.mjs` 纳入 `pnpm smoke:all` / `pnpm verify`
-- 元技能 `@skill-author`（Agent Skills 标准 + references + validate 脚本）
-- 领域示例 `@domain-web-app`（全栈孵化模板）
-- review 扩展：`current-has-next`、`skills-structure`
-- 子模板补 `docs/harness/` 精简副本
-- 标签 **v0.2.0** 发布 main
+- MCP GitHub 只读实战：`docs/ops/mcp-github-triage.md` + `.env.example`
+- Skill `@daily-triage`（阶段 1 只读 Triage Loop）
+- `.cursor/automations.example.json` 导出 4 个 Automation 示例
+- `pnpm loop sync-template` + `sync-manifest.yaml`
+- `pnpm loop workflow list|use <name>` 切换 handoff workflow
+- smoke：`ci-fix` handoff 链 + `sync-template`
+- 标签 **v0.3.0**
 - **验证**：`pnpm verify` exit 0 ✅
 
-## 下轮占位 · Round 4
+## 下轮占位 · Round 5
 
 ### 目标
 
-MCP GitHub 只读接入实战；`ci-fix` workflow 端到端；子项目 sync 母版 harness 脚本。
+阶段 2→3 过渡：MCP 写操作审批流；子项目独立仓库孵化 CLI；L4 SDK 占位。
 
 ### 拟措施
 
-1. 文档化 MCP 个人 Token 配置步骤（只读 Triage Loop）
-2. `harness/workflows/ci-fix.yaml` smoke 场景
-3. `pnpm loop sync-template` 将母版 harness 变更同步到 `_template`
-4. Cursor Automations 示例配置导出
+1. `harness/workflows/scaffold-project.yaml` 端到端 smoke
+2. MCP PR draft 流程文档（阶段 3，须人工 merge）
+3. `pnpm loop init --external <path>` 复制到母版外路径
+4. `docs/ops/cursor-sdk.md` L4 占位
 
 ### 验收标准
 
 ```bash
 pnpm verify
 pnpm loop workflow validate
-# ci-fix smoke 通过
+pnpm loop init --external ../my-standalone my-standalone
 ```
-
-### 风险
-
-- MCP Token 需用户本地配置，不入库
 
 ---
 
 ## 历史
 
-### Round 2 · Git + review + 子模板
+### Round 3 · init + skill-author · v0.2.0
+
+### Round 2 · Git 标准化
 
 ### Round 1 · 骨架
-
-### Round 0 · 立项

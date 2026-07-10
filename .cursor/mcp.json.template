@@ -6,7 +6,7 @@
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
       },
-      "description": "只读：Issues/PR。写操作须人工审批。复制为 mcp.json 后配置个人 Token。"
+      "description": "GitHub 只读：Issues/PR/Actions。写操作须人工审批。见 docs/ops/mcp-github-triage.md"
     }
   }
 }

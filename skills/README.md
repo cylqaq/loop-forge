@@ -19,7 +19,8 @@ loop-orchestrator → navigator → implementer → tester → loop-orchestrator
 | explorer | `roles/explorer/` | 只读探索 |
 | project-scaffold | `roles/project-scaffold/` | 孵化子项目 |
 | **skill-author** | `roles/skill-author/` | **设计/审查 SKILL.md（元技能）** |
-| **domain-web-app** | `roles/domain-web-app/` | **全栈 Web 领域示例** |
+| **domain-web-app** | `roles/domain-web-app/` | 全栈 Web 领域示例 |
+| **daily-triage** | `roles/daily-triage/` | MCP 只读 GitHub Triage |
 
 Cursor 副本：`.cursor/skills/`（含 subagents 子目录）
 

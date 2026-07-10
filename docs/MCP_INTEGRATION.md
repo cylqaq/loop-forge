@@ -12,8 +12,11 @@
 
 ```
 .cursor/mcp.json.template   # 母版模板（无密钥）
-.cursor/mcp.json            # 本地实例（gitignore，含 env）
+.cursor/mcp.json            # 本地实例（gitignore）
+.env.example                # GITHUB_TOKEN 占位
 ```
+
+**实战指南**：[`docs/ops/mcp-github-triage.md`](./ops/mcp-github-triage.md)
 
 ## 推荐连接器（按自主阶段）
 

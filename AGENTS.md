@@ -48,7 +48,11 @@ pnpm verify              # 完整验证门禁
 pnpm loop doctor         # Loop 健康检查（文档/hooks/状态）
 pnpm loop next           # 获取当前 handoff（单角色激活）
 pnpm loop handoff complete  # 完成 handoff + postflight
-pnpm loop workflow validate # L2↔L3 对齐校验
+pnpm loop workflow validate # L2↔L3 对齐
+pnpm loop workflow list     # 列出 workflow
+pnpm loop workflow use ci-fix  # 切换 handoff 工作流
+pnpm loop sync-template     # 母版 harness → _template
+pnpm smoke:ci-fix           # ci-fix 链 smoke校验
 pnpm smoke:all           # 零 LLM 机械 smoke
 pnpm worktree create <name>  # 并行实验隔离
 ```

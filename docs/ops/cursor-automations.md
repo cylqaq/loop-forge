@@ -38,12 +38,18 @@
 
 ## 4. Cursor Automations（cursor.com）
 
-可在 Cursor 设置中创建定时 Automation：
+可在 Cursor 设置中创建定时 Automation，或参考导出的示例：
+
+**示例配置**：`.cursor/automations.example.json`
 
 | 名称 | 调度 | Prompt 摘要 |
 |------|------|------------|
-| daily-triage | 工作日 9:00 | 只读 Triage → DAILY_TRIAGE.md |
-| weekly-doctor | 周一 9:00 | `pnpm loop doctor` + 报告 |
+| daily-triage | 工作日 9:00 | MCP 只读 Triage → DAILY_TRIAGE.md |
+| weekly-doctor | 周一 9:00 | `pnpm loop doctor` + review |
+| round-relay | 工作日 14:00 | 执行 CURRENT 一项 + verify |
+| ci-fix-goal | 手动/verify_fail | /goal 直到 verify 通过 |
+
+GitHub MCP 配置见 [`mcp-github-triage.md`](./mcp-github-triage.md)。
 
 **Token 提示**：从低频开始（每天一次），观察成本后再加快。
 

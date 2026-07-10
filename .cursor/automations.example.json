@@ -1,0 +1,45 @@
+{
+  "$schema": "loop-forge/automations-example",
+  "version": 1,
+  "description": "Cursor Automations 示例配置 — 导入 cursor.com 或作 /loop 参考",
+  "automations": [
+    {
+      "id": "daily-triage",
+      "name": "Daily GitHub Triage",
+      "schedule": "0 9 * * 1-5",
+      "schedule_human": "工作日 09:00",
+      "skill": "daily-triage",
+      "prompt": "运行 @daily-triage。使用 GitHub MCP 只读扫描 cylqaq/loop-forge 的 open issues 与 failed CI。分类写入 state/DAILY_TRIAGE.md。禁止改源码、禁止 PR。",
+      "autonomy_stage": 1
+    },
+    {
+      "id": "weekly-doctor",
+      "name": "Weekly Loop Doctor",
+      "schedule": "0 9 * * 1",
+      "schedule_human": "每周一 09:00",
+      "prompt": "运行 pnpm loop doctor 与 pnpm loop review。将结果摘要追加到 state/DAILY_TRIAGE.md 顶部。禁止改源码。",
+      "autonomy_stage": 1
+    },
+    {
+      "id": "round-relay",
+      "name": "Round Relay",
+      "schedule": "0 14 * * 1-5",
+      "schedule_human": "工作日 14:00",
+      "prompt": "读 docs/upgrade-plans/CURRENT.md 下轮占位，执行其中一项拟措施，跑 pnpm verify，更新 CURRENT 上轮摘要。单轮只做一项。",
+      "autonomy_stage": 2
+    },
+    {
+      "id": "ci-fix-goal",
+      "name": "CI Fix Goal",
+      "schedule": "manual",
+      "trigger": "verify_fail",
+      "prompt": "/goal 运行 pnpm verify 直到退出码 0。遵循 ci-fix workflow：explorer 诊断 → implementer 最小修复 → tester 验证。Reviewer 独立会话审查。",
+      "autonomy_stage": 2,
+      "workflow": "ci-fix"
+    }
+  ],
+  "chat_loop_equivalents": {
+    "daily-triage": "/loop 1d @daily-triage",
+    "verify-goal": "/goal pnpm verify 直到 exit 0"
+  }
+}

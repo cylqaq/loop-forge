@@ -59,4 +59,10 @@ execSync('node harness/scripts/loop.mjs workflow validate', { cwd: ROOT, stdio: 
 console.log('=== smoke: init (full) ===');
 execSync('node harness/scripts/smoke-init.mjs', { cwd: ROOT, stdio: 'inherit' });
 
+console.log('=== smoke: ci-fix ===');
+execSync('node harness/scripts/smoke-ci-fix.mjs', { cwd: ROOT, stdio: 'inherit' });
+
+console.log('=== smoke: sync-template ===');
+execSync('node harness/scripts/smoke-sync-template.mjs', { cwd: ROOT, stdio: 'inherit' });
+
 console.log('\n✓ smoke:all passed');

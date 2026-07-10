@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
  * Loop Forge CLI — Loop Engineering 执行 Harness 入口
- * Usage: pnpm loop [doctor|next|handoff|workflow|manifest|init]
  */
 import {
   ROOT,
@@ -12,8 +11,9 @@ import {
   saveLoopState,
   getNextHandoff,
   completeHandoff,
+  loadWorkflows,
 } from './loop-lib.mjs';
-import { writeFileSync, existsSync, mkdirSync, cpSync } from 'node:fs';
+import { existsSync, mkdirSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
 
 const [, , cmd, ...args] = process.argv;
@@ -68,8 +68,23 @@ async function main() {
           process.exit(1);
         }
         console.log('workflow validate: OK');
+      } else if (args[0] === 'list') {
+        for (const wf of loadWorkflows()) {
+          console.log(`- ${wf.name}: ${wf.description || ''} (${wf.steps?.length || 0} steps)`);
+        }
+      } else if (args[0] === 'use' && args[1]) {
+        const wf = loadWorkflows().find((w) => w.name === args[1]);
+        if (!wf) {
+          console.error(`Workflow not found: ${args[1]}`);
+          process.exit(1);
+        }
+        const state = loadLoopState();
+        state.handoff = { workflow: args[1], stepIndex: 0, activeSkill: null };
+        state.status = 'running';
+        saveLoopState(state);
+        console.log(`Active workflow: ${args[1]} (${wf.steps.length} steps)`);
       } else {
-        console.error('Usage: pnpm loop workflow validate');
+        console.error('Usage: pnpm loop workflow validate|list|use <name>');
         process.exit(1);
       }
       break;
@@ -136,6 +151,12 @@ async function main() {
       break;
     }
 
+    case 'sync-template': {
+      const { execSync } = await import('node:child_process');
+      execSync('node harness/scripts/sync-template.mjs', { cwd: ROOT, stdio: 'inherit' });
+      break;
+    }
+
     default:
       console.log(`Loop Forge CLI
 
@@ -144,9 +165,12 @@ Commands:
   next                Get next handoff (single skill)
   handoff complete    Advance workflow step
   workflow validate   L2↔L3 alignment
+  workflow list       List workflows
+  workflow use <name> Switch active handoff workflow
   manifest <name>     Show manifest
-  init [path]         Copy _template to path
+  init [path] [id]    Copy _template (--skip-install)
   review              Zero-LLM rule review
+  sync-template       Sync harness → projects/_template
 `);
   }
 }
