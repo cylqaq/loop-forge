@@ -102,6 +102,7 @@ Perceive → Reason → Act → Observe → (repeat)
 |------|-----|------|-----|
 | **内部** | `loop init projects/<id> <id>` | 母版 `projects/`（gitignore） | 可选 `--git` |
 | **外部** | `loop init --external <path> <id> --git` | 母版外任意空目录 | 推荐 `--git` |
+| **外部 adopt** | `loop adopt --external <path> <id>` | 母版外**已有业务**仓库 | 保留业务代码 |
 
 ### 7.2 孵化步骤
 
@@ -146,7 +147,7 @@ Perceive → Reason → Act → Observe → (repeat)
 | 阶段 2 草稿 | `ci-fix` workflow |
 | 阶段 3 半自动 | `@pr-draft` + `docs/ops/mcp-pr-draft-flow.md` |
 | 外部孵化 | `loop init --external` + `scaffold-project` v2 |
-| L4 蓝图 | `docs/ops/cursor-sdk.md`（Round 6 可执行） |
+| L4 蓝图 | `docs/ops/cursor-sdk.md`（Round 7 dry-run + manual dispatch） |
 
 ## 10. 关键边界
 

@@ -36,13 +36,24 @@ e:/my-project/<id>/            ← 外部子项目（推荐生产路径）
 2. 读 `docs/ops/root-project-protection.md`
 3. 确定 `id`、路径、是否 `--git`
 
-### Step 2 · Action
+### Step 2 · Action（空目录 init）
 
 ```powershell
 cd e:\my-project\loop-forge
 pnpm loop sync-template          # 可选：确保模板最新
 pnpm loop init --external e:\my-project\my-app my-app --git
 ```
+
+### Step 2b · Action（已有仓库 adopt）
+
+```powershell
+cd e:\my-project\loop-forge
+pnpm loop sync-template
+pnpm loop adopt --external e:\my-project\my-app my-app
+```
+
+**adopt 不覆盖**：`AGENTS.md`、`package.json`、业务 `docs/ARCHITECTURE.md` 等。  
+**adopt 写入**：`harness/`、subagents Skills、`verify-loop.mjs`、`.loop-forge-origin.yaml`。
 
 ### Step 3 · 子项目配置
 
@@ -108,13 +119,13 @@ pnpm loop next    # → project-scaffold
 | 错误 | 原因 | 处理 |
 |------|------|------|
 | External path must be outside projects/ | `--external` 指到了 projects/ | 改路径或去掉 --external |
-| Target not empty | 目录已有文件 | 换空目录 |
+| Target not empty | 目录已有文件 | init 换空目录；**已有项目用 adopt** |
 | project.yaml exists | 重复 init | 新目录或清理 |
+| Already adopted | 重复 adopt | 加 `--force` 重 overlay |
 
-## 8. 验收标准（Round 5）
+## 8. 验收标准
 
 ```bash
 pnpm verify
-pnpm loop init --external ../loop-forge-r5-test my-test --git
-cd ../loop-forge-r5-test && npm run verify
+pnpm smoke:adopt
 ```

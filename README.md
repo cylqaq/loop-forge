@@ -66,8 +66,9 @@ pnpm loop init
 - [Loop Engineering 完全指南](https://muximxc.github.io/loop-engineering-guide/)
 ## 当前状态
 
-**Round 4 完成** — 见 [`docs/upgrade-plans/CURRENT.md`](./docs/upgrade-plans/CURRENT.md)
+**Round 7 完成 · 等待期** — 见 [`docs/upgrade-plans/CURRENT.md`](./docs/upgrade-plans/CURRENT.md)
 
 - 仓库：https://github.com/cylqaq/loop-forge
-- 标签：**v0.3.0**（main）
-- 新能力：`@daily-triage` · `pnpm loop sync-template` · `ci-fix` workflow smoke
+- 标签：**v0.7.0**（main）
+- 母版已可用：`init` / `adopt` / `sync-template` / `cloud-loop` dry-run / Maker-Checker 子代理
+- 具体业务在**外部子项目**独立演进；母版暂停主动迭代，待新技能沉淀后再开 Round 8

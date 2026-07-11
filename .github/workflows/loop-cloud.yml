@@ -1,0 +1,35 @@
+name: Loop Cloud (L4 SDK)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry-run only (no SDK call)'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  cloud-loop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - name: Dry-run cloud-loop
+        if: inputs.dry_run == 'true'
+        run: node scripts/cloud-loop.mjs --dry-run
+      - name: Live cloud-loop + verify
+        if: inputs.dry_run == 'false'
+        env:
+          LOOP_CLOUD_ENABLED: 'true'
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          CURSOR_AGENT_MODEL: ${{ vars.CURSOR_AGENT_MODEL || 'composer-2.5-fast' }}
+        run: |
+          npm install @cursor/sdk --no-save || true
+          node scripts/cloud-loop.mjs

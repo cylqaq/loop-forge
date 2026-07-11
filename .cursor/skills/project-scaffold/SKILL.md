@@ -22,7 +22,8 @@ description: >-
 | 条件 | 命令 |
 |------|------|
 | 母版内试验 | `pnpm loop init projects/<id> <id>` |
-| 独立仓库/生产 | `pnpm loop init --external <abs-path> <id> --git` |
+| 独立仓库/生产（空目录） | `pnpm loop init --external <abs-path> <id> --git` |
+| **已有业务仓库** | `pnpm loop adopt --external <abs-path> <id>` |
 | CI 快速复制 | 加 `--skip-install` |
 
 ## Intent 产出

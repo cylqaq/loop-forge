@@ -8,6 +8,7 @@ warn_at_ratio: 0.85
 
 navigation_first: true
 nav_index_files:
+  - INDEX.yaml
   - projects/_template/INDEX.yaml
 nav_total_cap_kb: 6
 
@@ -33,6 +34,15 @@ loop_safety:
   consecutive_verify_fail: 3
   empty_loop_guard_minutes: 30
   stall_rounds: 3
+
+cloud_loop:
+  enabled_env: LOOP_CLOUD_ENABLED
+  api_key_env: CURSOR_API_KEY
+  model_env: CURSOR_AGENT_MODEL
+  default_model: composer-2.5-fast
+  max_prompt_kb: 8
+  dry_run_default: true
+  script: scripts/cloud-loop.mjs
 
 degradation:
   strategy: priority_cascade

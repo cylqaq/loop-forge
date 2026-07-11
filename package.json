@@ -1,6 +1,6 @@
 {
   "name": "loop-forge",
-  "version": "0.1.0",
+  "version": "0.7.0",
   "private": true,
   "description": "Loop Engineering 母版模板 — 收集 AI 协作智慧，孵化任意具体项目",
   "type": "module",
@@ -12,6 +12,10 @@
     "smoke:ci-fix": "node harness/scripts/smoke-ci-fix.mjs",
     "smoke:scaffold": "node harness/scripts/smoke-scaffold-project.mjs",
     "smoke:external": "node harness/scripts/smoke-external-init.mjs",
+    "smoke:pr-draft": "node harness/scripts/smoke-pr-draft.mjs --dry-run",
+    "smoke:adopt": "node harness/scripts/smoke-adopt.mjs",
+    "smoke:cloud-loop": "node harness/scripts/smoke-cloud-loop.mjs",
+    "cloud-loop": "node scripts/cloud-loop.mjs",
     "sync-template": "node harness/scripts/sync-template.mjs",
     "doctor": "node harness/scripts/loop.mjs doctor",
     "worktree": "node harness/scripts/worktree.mjs",
@@ -22,5 +26,8 @@
   },
   "dependencies": {
     "yaml": "^2.8.0"
+  },
+  "optionalDependencies": {
+    "@cursor/sdk": "^0.1.0"
   }
 }

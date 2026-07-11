@@ -14,6 +14,7 @@ import {
   loadWorkflows,
 } from './loop-lib.mjs';
 import { parseInitArgs, runInit } from './init-lib.mjs';
+import { parseAdoptArgs, runAdopt } from './adopt-lib.mjs';
 import { join } from 'node:path';
 
 const [, , cmd, ...args] = process.argv;
@@ -120,6 +121,29 @@ async function main() {
       break;
     }
 
+    case 'adopt': {
+      const template = join(ROOT, 'projects/_template');
+      const { existsSync } = await import('node:fs');
+      if (!existsSync(template)) {
+        console.error('Template not found');
+        process.exit(1);
+      }
+      if (!process.argv.includes('--external')) {
+        console.error('Usage: pnpm loop adopt --external <path> [id] [--force] [--skip-install]');
+        process.exit(1);
+      }
+      const p = parseAdoptArgs(process.argv.slice(3), ROOT);
+      runAdopt({
+        dest: p.dest,
+        id: p.id,
+        root: ROOT,
+        template,
+        skipInstall: p.skipInstall,
+        force: p.force,
+      });
+      break;
+    }
+
     case 'review': {
       const { execSync } = await import('node:child_process');
       execSync('node harness/review/run-review.mjs', { cwd: ROOT, stdio: 'inherit' });
@@ -146,6 +170,8 @@ Commands:
   init [path] [id]              Internal scaffold (projects/)
   init --external <path> [id]   External scaffold (outside projects/)
                                   Flags: --git --skip-install
+  adopt --external <path> [id]  Overlay harness on existing repo
+                                  Flags: --force --skip-install
   review              Zero-LLM rule review
   sync-template       Sync harness → projects/_template
 `);

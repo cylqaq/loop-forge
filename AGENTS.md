@@ -105,5 +105,6 @@ state/             # 运行时状态（gitignore）
 读 `docs/HANDOFF.md` + `docs/upgrade-plans/CURRENT.md`，然后：
 
 ```
-继续 Loop Forge Round N。先读 AGENTS.md 三件套，再执行 CURRENT.md 下轮占位。
+继续 Loop Forge。先读 AGENTS.md 三件套，再读 CURRENT.md。
+若 CURRENT 为等待期：答疑与小修复即可；若下轮占位已激活：执行该 Round 目标。
 ```

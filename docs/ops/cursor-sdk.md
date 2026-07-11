@@ -9,7 +9,7 @@
 L1 基础循环     /loop + verify + state          ✅
 L2 自动化       Hooks + GitHub Actions          ✅
 L3 编排         workflow + manifest + CLI       ✅
-L4 SDK/云端     @cursor/sdk + Automations API   🟡 蓝图
+L4 SDK/云端     @cursor/sdk + Automations API   ✅ dry-run + manual dispatch
 ```
 
 L4 不是替代 L1–L3，而是把 **Harness 编排** 推到 IDE 外：CI、定时任务、多仓库。
@@ -82,13 +82,13 @@ CURSOR_AGENT_MODEL=
 LOOP_CLOUD_ENABLED=false
 ```
 
-## 7. Round 6 实施清单
+## 7. Round 7 实施清单
 
-- [ ] 添加 `@cursor/sdk` 为 optionalDependency
-- [ ] `scripts/cloud-loop.mjs` 读取 CURRENT 驱动单次迭代
-- [ ] GitHub Action `loop-cloud.yml`（manual dispatch）
-- [ ] 文档：SDK Agent + Maker-Checker 分离
-- [ ] 成本预算：`context-budget.yaml` 增加 `cloud_loop.*`
+- [x] 添加 `@cursor/sdk` 为 optionalDependency
+- [x] `scripts/cloud-loop.mjs` 读取 CURRENT 驱动单次迭代（dry-run 默认）
+- [x] GitHub Action `loop-cloud.yml`（manual dispatch）
+- [x] 成本预算：`context-budget.yaml` 增加 `cloud_loop.*`
+- [ ] 文档：SDK Agent + Maker-Checker 分离（见 `docs/LOOP_ENGINEERING.md` §8）
 
 ## 8. 安全
 

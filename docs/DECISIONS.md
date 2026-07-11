@@ -161,8 +161,44 @@
 
 - **日期**：2026-07-10 · Round 5
 - **问题**：SDK/Automations API 何时落地？
-- **决策**：Round 5 仅 `docs/ops/cursor-sdk.md` 蓝图与 `.env.example` 预留变量；Round 6 实现可运行 hello-agent。
+- **决策**：Round 5 仅 `docs/ops/cursor-sdk.md` 蓝图与 `.env.example` 预留变量；Round 7 实现可运行 hello-agent。
 - **理由**：L4 执行文档先于可执行脚本；避免半成品 SDK 进入 verify 链。
-- **影响**：`docs/ops/cursor-sdk.md`、Round 6 占位
+- **影响**：`docs/ops/cursor-sdk.md`、Round 7 占位
 - **锚点**：`docs/LOOP_ENGINEERING.md` L4 行
+
+## D-019 · adopt 现有仓库（overlay 模式）
+
+- **日期**：2026-07-10 · Round 6
+- **问题**：`loop init` 要求空目录，无法改造已有业务仓库（如 linkscope-2）？
+- **决策**：新增 `pnpm loop adopt --external <path> [id]`：从 `_template` overlay harness/skills/docs-harness，**不覆盖** AGENTS.md、package.json、业务 docs；写入 `.loop-forge-origin.yaml`（`mode: adopt`）。
+- **理由**：Loop Engineering 改造对象是架构体系；业务代码由子项目 self-loop 迭代。
+- **影响**：`harness/scripts/adopt-lib.mjs`、`smoke-adopt.mjs`、子项目 `verify-loop.mjs`、模板 `loop.mjs` 精简
+- **锚点**：`docs/ops/external-project-lifecycle.md` §adopt、`docs/ARCHITECTURE.md` §7
+
+## D-020 · 子项目 CLI 与母版分离
+
+- **日期**：2026-07-10 · Round 6
+- **问题**：子项目 `loop init/sync-template/review` 误调用导致失败？
+- **决策**：同步到子项目的 `loop.mjs` 仅保留 doctor/next/handoff/workflow/manifest；母版专属命令显式报错。
+- **理由**：子项目自洽；避免 Agent 在错误仓库执行 init。
+- **影响**：`projects/_template/harness/scripts/loop.mjs` 独立维护；`sync-manifest.yaml` **不同步** loop.mjs
+- **锚点**：D-019
+
+## D-021 · L4 cloud-loop dry-run 默认
+
+- **日期**：2026-07-11 · Round 7
+- **问题**：L4 SDK 如何在 verify 链中落地而不强制 API Key？
+- **决策**：`scripts/cloud-loop.mjs` dry-run 为默认（读 CURRENT + exit 0）；live 需 `LOOP_CLOUD_ENABLED=true` + `CURSOR_API_KEY`；`@cursor/sdk` 为 optionalDependency。
+- **理由**：验证优先不变；CI 可 manual dispatch dry-run；live 由用户显式启用。
+- **影响**：`loop-cloud.yml`、`smoke-cloud-loop.mjs`、`context-budget.yaml` cloud_loop
+- **锚点**：`docs/ops/cursor-sdk.md` §7
+
+## D-022 · 母版进入等待期（v0.7.0 可用即停）
+
+- **日期**：2026-07-11 · Round 7 收尾
+- **问题**：试验子项目（如外部 adopt 仓库）已可独立演进；母版是否继续绑定业务验证占位？
+- **决策**：Round 7 完成后母版标记**等待期**；`CURRENT.md` 下轮占位改为「触发条件 + 重启模板」，不预设 Round 8 任务；具体业务迭代只在子项目；母版仅在学到新通用技能/架构时重启 Round。
+- **理由**：母版职责是范式与 Harness 沉淀，非业务试验场；避免 CURRENT 被外部项目任务污染；复利来自稳定可用的模板而非持续 churn。
+- **影响**：README/HANDOFF 区分等待期与活跃 Round；linkscope 等试验引用从占位文档移除（历史 D-019 决策保留）。
+- **锚点**：`docs/upgrade-plans/CURRENT.md`、`docs/HANDOFF.md`
 

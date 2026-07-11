@@ -2,9 +2,7 @@
 # 用法: pnpm loop sync-template
 
 files:
-  - harness/scripts/loop.mjs
   - harness/scripts/loop-lib.mjs
-  - harness/scripts/init-lib.mjs
   - harness/context-budget.yaml
   - harness/workflows/round-cycle.yaml
   - harness/manifests/round-start.yaml
@@ -12,8 +10,12 @@ files:
   - harness/manifests/round-close.yaml
   - harness/templates/loop-state.json.template
   - scripts/before-start.mjs
+  - scripts/verify-loop.mjs
+  - .cursor/mcp.json.template
 
 dirs:
   - docs/harness
+  - .cursor/skills/subagents
 
 # 子项目 verify 保持精简版，不同步 scripts/verify.mjs
+# init-lib / adopt-lib 仅母版 harness/scripts/

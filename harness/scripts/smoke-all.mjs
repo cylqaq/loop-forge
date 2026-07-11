@@ -71,4 +71,13 @@ execSync('node harness/scripts/smoke-scaffold-project.mjs', { cwd: ROOT, stdio: 
 console.log('=== smoke: external-init ===');
 execSync('node harness/scripts/smoke-external-init.mjs', { cwd: ROOT, stdio: 'inherit' });
 
+console.log('=== smoke: adopt ===');
+execSync('node harness/scripts/smoke-adopt.mjs', { cwd: ROOT, stdio: 'inherit' });
+
+console.log('=== smoke: pr-draft ===');
+execSync('node harness/scripts/smoke-pr-draft.mjs --dry-run', { cwd: ROOT, stdio: 'inherit' });
+
+console.log('=== smoke: cloud-loop ===');
+execSync('node harness/scripts/smoke-cloud-loop.mjs', { cwd: ROOT, stdio: 'inherit' });
+
 console.log('\n✓ smoke:all passed');

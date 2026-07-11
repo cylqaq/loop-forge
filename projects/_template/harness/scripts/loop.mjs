@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Loop Forge CLI — Loop Engineering 执行 Harness 入口
+ * Loop CLI — 子项目执行 Harness 入口（无 init/sync-template/review/adopt）
  */
 import {
   ROOT,
@@ -13,16 +13,23 @@ import {
   completeHandoff,
   loadWorkflows,
 } from './loop-lib.mjs';
-import { parseInitArgs, runInit } from './init-lib.mjs';
-import { join } from 'node:path';
 
 const [, , cmd, ...args] = process.argv;
+
+const MOTHER_ONLY = new Set(['init', 'adopt', 'sync-template', 'review']);
 
 function print(obj) {
   console.log(JSON.stringify(obj, null, 2));
 }
 
+function rejectMotherOnly(name) {
+  console.error(`${name} is mother-repo only. Run from loop-forge root.`);
+  process.exit(1);
+}
+
 async function main() {
+  if (MOTHER_ONLY.has(cmd)) rejectMotherOnly(cmd);
+
   switch (cmd) {
     case 'doctor': {
       const r = doctor();
@@ -100,40 +107,8 @@ async function main() {
       break;
     }
 
-    case 'init': {
-      const template = join(ROOT, 'projects/_template');
-      const { existsSync } = await import('node:fs');
-      if (!existsSync(template)) {
-        console.error('Template not found');
-        process.exit(1);
-      }
-      const p = parseInitArgs(process.argv.slice(3), ROOT);
-      runInit({
-        dest: p.dest,
-        id: p.id,
-        root: ROOT,
-        template,
-        skipInstall: p.skipInstall,
-        initGit: p.initGit,
-        external: p.external,
-      });
-      break;
-    }
-
-    case 'review': {
-      const { execSync } = await import('node:child_process');
-      execSync('node harness/review/run-review.mjs', { cwd: ROOT, stdio: 'inherit' });
-      break;
-    }
-
-    case 'sync-template': {
-      const { execSync } = await import('node:child_process');
-      execSync('node harness/scripts/sync-template.mjs', { cwd: ROOT, stdio: 'inherit' });
-      break;
-    }
-
     default:
-      console.log(`Loop Forge CLI
+      console.log(`Loop CLI (sub-project)
 
 Commands:
   doctor              Health check
@@ -143,11 +118,8 @@ Commands:
   workflow list       List workflows
   workflow use <name> Switch active handoff workflow
   manifest <name>     Show manifest
-  init [path] [id]              Internal scaffold (projects/)
-  init --external <path> [id]   External scaffold (outside projects/)
-                                  Flags: --git --skip-install
-  review              Zero-LLM rule review
-  sync-template       Sync harness → projects/_template
+
+Mother-only (run from loop-forge): init, adopt, sync-template, review
 `);
   }
 }
