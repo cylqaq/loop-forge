@@ -9,7 +9,7 @@
 | 理解项目 | [`ARCHITECTURE.md`](./ARCHITECTURE.md) |
 | Loop 怎么用 | [`LOOP_ENGINEERING.md`](./LOOP_ENGINEERING.md) |
 | 当前做到哪了 | [`upgrade-plans/CURRENT.md`](./upgrade-plans/CURRENT.md) |
-| 历史决策 WHY | [`DECISIONS.md`](./DECISIONS.md) |
+| 历史决策 WHY | [`DECISIONS.md`](./DECISIONS.md) 热账本 + [`decisions/`](./decisions/) 冷 ADR |
 | 新会话接力 | [`HANDOFF.md`](./HANDOFF.md) |
 | MCP 怎么接 | [`MCP_INTEGRATION.md`](./MCP_INTEGRATION.md) |
 | 文档怎么写 | [`DOCUMENTATION_STANDARDS.md`](./DOCUMENTATION_STANDARDS.md) |
@@ -26,7 +26,8 @@
 ```
 docs/
 ├── ARCHITECTURE.md          # 长期：架构与边界
-├── DECISIONS.md             # 长期：决策（仅追加）
+├── DECISIONS.md             # 热：活跃约束索引（≤8KB，D-023）
+├── decisions/               # 冷：D-NNN-*.md 完整 ADR（仅追加）
 ├── LOOP_ENGINEERING.md      # Loop 范式落地
 ├── DOCUMENTATION_STANDARDS.md
 ├── HANDOFF.md

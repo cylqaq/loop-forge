@@ -11,6 +11,8 @@
 | `.cursor/skills/skill-author/**` | `references/patterns.md` | `@skill-author` |
 | `.cursor/hooks.json` | `LOOP_ENGINEERING.md` §Automations | `@loop-core` |
 | `docs/**` | `DOCUMENTATION_STANDARDS.md` | `@navigator` |
+| `docs/DECISIONS.md` | 热账本协议（D-023） | `@loop-orchestrator` |
+| `docs/decisions/**` | 对应冷 ADR + 热表一行 | `@loop-orchestrator` |
 | `docs/upgrade-plans/**` | `CURRENT.md` | `@loop-orchestrator` |
 | `projects/_template/**` | `ops/root-project-protection.md` | `@project-scaffold` |
 | `harness/scripts/init-lib.mjs` | `external-project-lifecycle.md` | `@project-scaffold` |
@@ -18,7 +20,7 @@
 | `docs/ops/cursor-sdk.md` | `LOOP_ENGINEERING.md` L4 | `@loop-orchestrator` |
 | `projects/*/`（非模板） | 子项目 `AGENTS.md` | `@domain-web-app` 或子项目 Skill |
 | `scripts/verify.mjs` | `ARCHITECTURE.md` §验证 | `@tester` |
-| `state/**` | `DECISIONS.md` D-008 | `@loop-orchestrator` |
+| `state/**` | 冷 ADR [D-008](../decisions/D-008-state-not-committed.md) | `@loop-orchestrator` |
 
 ## 冲突时
 

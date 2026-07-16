@@ -1,6 +1,6 @@
 {
   "name": "loop-forge",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "description": "Loop Engineering 母版模板 — 收集 AI 协作智慧，孵化任意具体项目",
   "type": "module",

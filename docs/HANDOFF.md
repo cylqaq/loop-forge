@@ -19,7 +19,7 @@
 ```
 我在 Loop Forge 母版项目（e:\my-project\loop-forge）。
 请按 AGENTS.md 三件套顺序阅读，然后执行 CURRENT.md 的下轮占位。
-约束：每步后跑 pnpm verify；禁止模型自评完成；一轮结束更新 CURRENT + DECISIONS。
+约束：每步后跑 pnpm verify；禁止模型自评完成；一轮结束更新 CURRENT + 决策账本（热/冷）。
 ```
 
 ## 从子项目接力
@@ -68,7 +68,8 @@ pnpm smoke:cloud-loop   # L4 SDK dry-run
 |------|------|
 | `state/loop-state.json` | 运行时迭代计数（本地，gitignore） |
 | `docs/upgrade-plans/CURRENT.md` | 权威轮次摘要 |
-| `docs/DECISIONS.md` | 长期 WHY |
+| `docs/DECISIONS.md` | 决策热账本（活跃 WHY 索引） |
+| `docs/decisions/` | 冷 ADR 全文（按需） |
 | `.loop-forge-origin.yaml` | 子项目追溯母版 |
 
 ## 停止条件

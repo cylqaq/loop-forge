@@ -31,7 +31,7 @@ steps:
     skill: loop-orchestrator
     manifest: round-close
     phase: 04-adjustment
-    description: 更新 CURRENT、DECISIONS、loop-state
+    description: 更新 CURRENT、决策账本（热/冷）、loop-state
 
 handoff:
   protocol: one_skill_per_session

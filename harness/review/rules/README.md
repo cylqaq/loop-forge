@@ -7,6 +7,7 @@
 | 规则 | 文件 | 检查内容 |
 |------|------|---------|
 | required-docs | `required-docs.mjs` | 关键文档存在 |
+| decisions-ledger | `decisions-ledger.mjs` | 热账本体积 + 冷 ADR 1:1 索引（D-023） |
 | no-secrets | `no-secrets.mjs` |  staged 文件无密钥模式 |
 | workflow-align | `workflow-align.mjs` | L2↔L3 对齐 |
 | current-has-next | `current-has-next.mjs` | CURRENT 含下轮占位与验收 |

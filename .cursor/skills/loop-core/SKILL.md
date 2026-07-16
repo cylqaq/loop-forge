@@ -12,7 +12,7 @@ description: Loop Engineering 母版核心知识。涉及 Automations、验证�
 3. **Skills** — `.cursor/skills/`、`skills/roles/`
 4. **Connectors** — `mcp.json.template`
 5. **Sub-agents** — `subagents/`、Maker-Checker
-6. **Memory** — `AGENTS.md`、`DECISIONS.md`、`CURRENT.md`、`loop-state.json`
+6. **Memory** — `AGENTS.md`、决策热账本 `DECISIONS.md` + 冷 ADR、`CURRENT.md`、`loop-state.json`
 
 ## 五阶段
 

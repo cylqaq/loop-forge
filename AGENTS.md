@@ -16,7 +16,7 @@ Loop Forge 是 **Loop Engineering 母版模板仓库**：
 ## 必读三件套（按顺序）
 
 1. **`docs/ARCHITECTURE.md`** — 分层架构、六大积木映射、边界。**改 Harness/Skills 前必读**。
-2. **`docs/DECISIONS.md`** — 累积原则（**仅追加** D-NNN）。新决策不得静默推翻旧条目。
+2. **`docs/DECISIONS.md`** — 决策热账本（活跃约束索引，默认只读）。完整 ADR 在 `docs/decisions/D-NNN-*.md`（冷路径，仅追加）。新决策不得静默推翻旧条目。
 3. **`docs/upgrade-plans/CURRENT.md`** — 单窗口迭代（上轮摘要 + 下轮占位）。**每轮开始前先读**。
 
 ## Loop 五阶段纪律
@@ -29,13 +29,13 @@ Loop Forge 是 **Loop Engineering 母版模板仓库**：
 | **Context** | 按 `docs/harness/README.md` 渐进披露读文档 |
 | **Action** | 实现 + `pnpm loop handoff` 单 Skill 会话 |
 | **Observation** | 运行 `pnpm verify` / `pnpm smoke:all`（**禁止模型自评**） |
-| **Adjustment** | 更新 `CURRENT.md`、`DECISIONS.md`，规划下轮 |
+| **Adjustment** | 更新 `CURRENT.md`、决策账本（热表 + 冷 ADR），规划下轮 |
 
 ## 工作纪律
 
 - 每轮收尾必做：
   1. 精简 `docs/upgrade-plans/CURRENT.md` 为上轮摘要 + 下轮占位
-  2. 可复用原则以 `D-NNN` 追加到 `docs/DECISIONS.md`
+  2. 可复用原则：新建 `docs/decisions/D-NNN-*.md` 并在 `docs/DECISIONS.md` 热表追加一行
   3. 必要时小幅修订 `docs/ARCHITECTURE.md`
   4. 删除死代码与过期占位
 - 改 Skill / workflow / manifest / 文档任意一层 → 对照 `docs/harness/layer-sync-contract.md`
@@ -75,12 +75,15 @@ pnpm worktree create <name>  # 并行实验隔离
   hooks.json       # 生命周期门禁
   mcp.json.template
 docs/              # 文档 Harness（L1-L3）
+  DECISIONS.md     # 决策热账本（≤8KB）
+  decisions/       # 冷 ADR（D-NNN-*.md）
   harness/         # 上下文地图 + 五层联动契约
   upgrade-plans/   # CURRENT.md 单窗口迭代
 harness/           # 执行 Harness（可运行）
   scripts/         # loop.mjs CLI
   workflows/       # L2 编排
   manifests/       # L3 读/写清单
+  review/          # 零 LLM 规则（含 decisions-ledger）
   context-budget.yaml
 skills/            # 可版本化 Skills（母版级）
 projects/

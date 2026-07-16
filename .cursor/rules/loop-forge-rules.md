@@ -9,7 +9,7 @@
 ## 代码与文档
 
 - 改 harness/skills/docs 任一层 → 跑 `pnpm loop workflow validate`
-- 决策仅追加到 `docs/DECISIONS.md`
+- 决策：新建冷 ADR `docs/decisions/D-NNN-*.md`，并在热账本 `docs/DECISIONS.md` 追加一行（禁止静默覆盖）
 - `AGENTS.md` 薄入口，细则在 `docs/`
 
 ## 禁止

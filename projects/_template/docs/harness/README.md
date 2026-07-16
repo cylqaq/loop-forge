@@ -8,7 +8,7 @@
 - 涉及子项目孵化或五层联动变更
 - 不确定读哪份长文
 
-仅改单文件且熟悉规范时，读根 `AGENTS.md` + `docs/style-guide/agent-routing.md` 即可。
+仅改单文件且熟悉规范时，读根 `AGENTS.md` + [`agent-routing.md`](./agent-routing.md) 即可。
 
 ## L0→L3 层级
 
@@ -28,6 +28,7 @@
 | Loop 范式 | 本文 | [`LOOP_ENGINEERING.md`](../LOOP_ENGINEERING.md) |
 | 架构边界 | [`../ARCHITECTURE.md`](../ARCHITECTURE.md) | [`layer-sync-contract.md`](./layer-sync-contract.md) |
 | 迭代接力 | [`../upgrade-plans/`](../upgrade-plans/) | [`CURRENT.md`](../upgrade-plans/CURRENT.md) |
+| 决策记忆 | [`../DECISIONS.md`](../DECISIONS.md) 热账本 | [`../decisions/`](../decisions/) 冷 ADR（按需） |
 | 运维 | [`ops/`](./ops/) | [`branch-strategy.md`](./ops/branch-strategy.md)、[`github-setup.md`](./ops/github-setup.md) |
 | 母版保护 | [`../ops/root-project-protection.md`](../ops/root-project-protection.md) | — |
 

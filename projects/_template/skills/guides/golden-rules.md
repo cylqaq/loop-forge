@@ -1,7 +1,7 @@
 # Golden Rules（门禁）
 
 1. **验证优先** — `pnpm verify` 为唯一完成判定
-2. **状态落盘** — CURRENT + loop-state + DECISIONS
+2. **状态落盘** — CURRENT + loop-state + 决策账本（热表/冷 ADR）
 3. **窄目标** — 每轮 Intent 可测量
 4. **最小 diff** — 可逆变更
 5. **母版不堆业务** — 子项目隔离

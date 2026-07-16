@@ -10,7 +10,7 @@ description: Loop 编排者。管理 round-cycle、CURRENT 更新、handoff 推�
 - Phase 00 Intent / Phase 04 Adjustment
 - 维护 `CURRENT.md` 上轮摘要 + 下轮占位
 - `pnpm loop next` / `handoff complete`
-- 追加 `DECISIONS.md` D-NNN
+- 追加决策：冷 ADR `docs/decisions/D-NNN-*.md` + 热账本一行
 
 ## round-cycle 位置
 

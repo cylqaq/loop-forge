@@ -9,7 +9,7 @@
 3. **验证**：`pnpm verify` + `pnpm smoke:all` → Observation
 4. **收尾**：
    - 压缩 `CURRENT.md` 为上轮摘要 + **新**下轮占位
-   - 追加 `DECISIONS.md` D-NNN
+   - 新原则 → `docs/decisions/D-NNN-*.md` + 热账本一行
    - 更新 `state/loop-state.json`（本地）
 
 ## 单窗口原则

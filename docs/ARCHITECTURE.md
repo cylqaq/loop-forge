@@ -47,7 +47,7 @@ Perceive → Reason → Act → Observe → (repeat)
 | **Skills** | 项目知识外置 | `.cursor/skills/`、`skills/roles/` |
 | **Connectors** | 接真实世界 | `mcp.json.template`、文档 `MCP_INTEGRATION.md` |
 | **Sub-agents** | 分工制衡 | `subagents/*`、Task 工具、`REVIEW_PROMPT.md` |
-| **Memory** | 跨会话记忆 | `AGENTS.md`、`DECISIONS.md`、`loop-state.json`、`CURRENT.md` |
+| **Memory** | 跨会话记忆 | `AGENTS.md`、决策热账本 `DECISIONS.md` + 冷 ADR `docs/decisions/`、`loop-state.json`、`CURRENT.md` |
 
 ## 3. 双 Harness 架构
 
@@ -148,10 +148,11 @@ Perceive → Reason → Act → Observe → (repeat)
 | 阶段 3 半自动 | `@pr-draft` + `docs/ops/mcp-pr-draft-flow.md` |
 | 外部孵化 | `loop init --external` + `scaffold-project` v2 |
 | L4 蓝图 | `docs/ops/cursor-sdk.md`（Round 7 dry-run + manual dispatch） |
+| 决策账本 | 热 `DECISIONS.md` + 冷 `docs/decisions/`（Round 8 / D-023） |
 
 ## 10. 关键边界
 
 - 母版 `harness/` 脚本不得依赖具体业务 DB/API
 - `state/` 运行时文件不入库（模板用 `.template`）
-- 决策仅追加：`DECISIONS.md` 不可删改历史 D 编号
+- 决策热冷分层（D-023）：Agent 默认只读 `DECISIONS.md` 热账本（≤8KB）；完整条目在 `docs/decisions/D-NNN-*.md`（仅追加正文）；不可静默删改历史 D 编号
 - 单窗口计划：仅 `upgrade-plans/CURRENT.md` 为活跃迭代文档

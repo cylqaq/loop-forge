@@ -8,7 +8,7 @@
 
 1. 压缩 `CURRENT.md` → 上轮摘要
 2. 写下轮占位（或标记 Round 完成）
-3. `DECISIONS.md` 追加 D-NNN（若有新原则）
+3. 新原则 → 新建 `docs/decisions/D-NNN-*.md` + 热账本 `DECISIONS.md` 追加一行（D-023）
 4. `loop-state` → `status: completed`，`currentRound++`
 
 ## 验证失败

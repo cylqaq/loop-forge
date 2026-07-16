@@ -35,6 +35,14 @@ loop_safety:
   empty_loop_guard_minutes: 30
   stall_rounds: 3
 
+# Decision Ledger (D-023) — Agent 默认只读热账本
+decisions:
+  hot_path: docs/DECISIONS.md
+  cold_dir: docs/decisions
+  hot_path_max_kb: 8
+  per_entry_max_kb: 4
+  agent_default: hot_path
+
 cloud_loop:
   enabled_env: LOOP_CLOUD_ENABLED
   api_key_env: CURSOR_API_KEY

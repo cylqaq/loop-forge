@@ -11,6 +11,7 @@ pnpm loop init projects/my-app my-app
 
 - `harness/` — round-cycle CLI
 - `docs/harness/` — 精简 Harness 地图
+- `docs/DECISIONS.md` + `docs/decisions/` — 决策热账本 / 冷 ADR（D-023）
 - `.cursor/hooks.json`
 - `skills/guides/` — handoff 协议
 
