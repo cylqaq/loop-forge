@@ -7,6 +7,7 @@
   "scripts": {
     "loop": "node harness/scripts/loop.mjs",
     "verify": "node scripts/verify.mjs",
+    "review": "node harness/review/run-review.mjs",
     "doctor": "node harness/scripts/loop.mjs doctor"
   },
   "engines": {

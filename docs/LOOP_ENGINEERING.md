@@ -102,7 +102,8 @@ pnpm worktree remove experiment-round-2
 | 入口记忆 | `AGENTS.md` | 每会话自动注入 |
 | 决策记忆 | `docs/DECISIONS.md` + `docs/decisions/` | 热索引 + 冷 ADR（D-023） |
 | 轮次记忆 | `docs/upgrade-plans/CURRENT.md` | 单窗口摘要 |
-| 运行记忆 | `state/loop-state.json` | 迭代计数/历史 |
+| 运行事件 | `state/run-events.jsonl` | 追加的迁移、gate、回执事实 |
+| 运行投影 | `state/loop-state.json` | 当前 cursor、预算与状态（不入库） |
 | 接力记忆 | `docs/HANDOFF.md` | 新会话 onboarding |
 
 **仓库记得，模型不记得** — 一切重要状态落盘。
@@ -146,7 +147,7 @@ Loop Engineering 能力之一：**一轮做不完，用文档设计下轮**。
 1. `CURRENT.md` ← 上轮摘要（做了什么、验证结果、遗留）
 2. `CURRENT.md` ← 下轮占位（目标、拟措施、验收、风险）
 3. 决策账本 ← 新冷 ADR + 热表一行（D-023）
-4. `loop-state.json` ← iteration++
+4. `run-events.jsonl` 追加迁移事实；`loop-state.json` 更新投影（完整 workflow 才 iteration++）
 
 下轮开始：
 

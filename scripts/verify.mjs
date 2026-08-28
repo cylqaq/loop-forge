@@ -17,6 +17,7 @@ const REQUIRED = [
   'docs/upgrade-plans/CURRENT.md',
   'harness/workflows/round-cycle.yaml',
   'harness/manifests/round-start.yaml',
+  'harness/project-capabilities.yaml',
   '.cursor/hooks.json',
 ];
 

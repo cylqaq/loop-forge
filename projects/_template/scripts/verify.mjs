@@ -19,6 +19,8 @@ for (const f of REQUIRED) {
 
 try {
   execSync('node harness/scripts/loop.mjs doctor', { cwd: ROOT, stdio: 'inherit' });
+  execSync('node harness/scripts/loop.mjs workflow validate', { cwd: ROOT, stdio: 'inherit' });
+  execSync('node harness/review/run-review.mjs', { cwd: ROOT, stdio: 'inherit' });
 } catch {
   failed = true;
 }

@@ -5,7 +5,7 @@
 | 路径模式 | 先读 | 推荐 Skill |
 |----------|------|-----------|
 | `harness/**` | `layer-sync-contract.md` | `@loop-orchestrator` |
-| `harness/workflows/**` | `ARCHITECTURE.md` §五层 | `@loop-orchestrator` |
+| `harness/workflows/**` | `ARCHITECTURE.md` §六层控制契约 | `@loop-orchestrator` |
 | `harness/manifests/**` | 对应 workflow | `@navigator` |
 | `.cursor/skills/**` | `LOOP_ENGINEERING.md` §Skills | `@skill-author` |
 | `.cursor/skills/skill-author/**` | `references/patterns.md` | `@skill-author` |

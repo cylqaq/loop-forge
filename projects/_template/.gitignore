@@ -1,4 +1,6 @@
 node_modules/
 state/loop-state.json
+state/run-events.jsonl
+state/review-receipt.json
 .env
 .cursor/mcp.json

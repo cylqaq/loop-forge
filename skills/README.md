@@ -3,14 +3,13 @@
 ## round-cycle 链
 
 ```
-loop-orchestrator → navigator → implementer → tester → loop-orchestrator
-                              ↘ reviewer（独立会话）
+loop-orchestrator → navigator → implementer → tester → reviewer → loop-orchestrator
 ```
 
 ## scaffold-project 链（Round 5 v2）
 
 ```
-project-scaffold → implementer → tester → loop-orchestrator
+project-scaffold → implementer → tester → reviewer → loop-orchestrator
 ```
 
 Workflow：`harness/workflows/scaffold-project.yaml`  

@@ -8,10 +8,10 @@ import {
   validateWorkflows,
   loadManifest,
   loadLoopState,
-  saveLoopState,
-  getNextHandoff,
+  activateNextHandoff,
   completeHandoff,
   loadWorkflows,
+  selectWorkflow,
 } from './loop-lib.mjs';
 import { parseInitArgs, runInit } from './init-lib.mjs';
 import { parseAdoptArgs, runAdopt } from './adopt-lib.mjs';
@@ -21,6 +21,11 @@ const [, , cmd, ...args] = process.argv;
 
 function print(obj) {
   console.log(JSON.stringify(obj, null, 2));
+}
+
+function option(args, name) {
+  const index = args.indexOf(name);
+  return index >= 0 ? args[index + 1] : undefined;
 }
 
 async function main() {
@@ -40,23 +45,21 @@ async function main() {
 
     case 'next': {
       const state = loadLoopState();
-      if (state.status === 'blocked') {
-        console.error('Loop blocked. Manual intervention required.');
-        process.exit(2);
-      }
-      const handoff = getNextHandoff(state);
-      state.handoff.activeSkill = handoff.skill || null;
-      saveLoopState(state);
+      const handoff = activateNextHandoff(state);
       print(handoff);
       break;
     }
 
     case 'handoff': {
       if (args[0] !== 'complete') {
-        console.error('Usage: pnpm loop handoff complete');
+        console.error('Usage: pnpm loop handoff complete [--maker-session <id>] [--reviewer-session <id>] [--reviewed-revision <id>]');
         process.exit(1);
       }
-      const state = completeHandoff(loadLoopState());
+      const state = completeHandoff(loadLoopState(), {
+        makerSession: option(args, '--maker-session'),
+        reviewerSession: option(args, '--reviewer-session'),
+        reviewedRevision: option(args, '--reviewed-revision'),
+      });
       print({ ok: true, state });
       break;
     }
@@ -80,12 +83,14 @@ async function main() {
           process.exit(1);
         }
         const state = loadLoopState();
-        state.handoff = { workflow: args[1], stepIndex: 0, activeSkill: null };
-        state.status = 'running';
-        saveLoopState(state);
+        selectWorkflow(state, args[1], {
+          newSession: args.includes('--new-session'),
+          resetReason: option(args, '--reason'),
+          targetRoot: option(args, '--target-root'),
+        });
         console.log(`Active workflow: ${args[1]} (${wf.steps.length} steps)`);
       } else {
-        console.error('Usage: pnpm loop workflow validate|list|use <name>');
+        console.error('Usage: pnpm loop workflow validate|list|use <name> [--target-root <path>] [--new-session --reason <text>]');
         process.exit(1);
       }
       break;
@@ -162,10 +167,10 @@ async function main() {
 Commands:
   doctor              Health check
   next                Get next handoff (single skill)
-  handoff complete    Advance workflow step
+  handoff complete    Advance an active step; implementer/reviewer require session evidence
   workflow validate   L2↔L3 alignment
   workflow list       List workflows
-  workflow use <name> Switch active handoff workflow
+  workflow use <name> Switch idle workflow; budget reset needs --new-session --reason <text>
   manifest <name>     Show manifest
   init [path] [id]              Internal scaffold (projects/)
   init --external <path> [id]   External scaffold (outside projects/)

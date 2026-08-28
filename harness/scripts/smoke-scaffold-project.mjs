@@ -2,7 +2,7 @@
 /**
  * Smoke: scaffold-project workflow handoff chain
  */
-import { loadWorkflows, getNextHandoff, validateWorkflows } from './loop-lib.mjs';
+import { loadWorkflows, validateWorkflows } from './loop-lib.mjs';
 
 function assert(cond, msg) {
   if (!cond) throw new Error(msg);
@@ -14,21 +14,16 @@ assert(validateWorkflows().length === 0, 'workflow validation failed');
 
 const wf = loadWorkflows().find((w) => w.name === 'scaffold-project');
 assert(wf, 'scaffold-project workflow missing');
-assert(wf.steps.length === 4, 'scaffold-project should have 4 steps');
+assert(wf.steps.length === 5, 'scaffold-project should have 5 steps');
+assert(wf.goal?.completion_gate === 'project-verify', 'scaffold-project should require project verify gate');
+const verify = wf.steps.find((step) => step.id === 'verify');
+assert(verify?.manifest === 'scaffold-close', 'scaffold-project verify step should use scaffold-close');
 
-const state = { handoff: { workflow: 'scaffold-project', stepIndex: 0, activeSkill: null } };
-const skills = [];
-
-while (true) {
-  const h = getNextHandoff(state);
-  if (h.done) break;
-  skills.push(h.skill);
-  assert(h.manifest, `step ${h.step.id} needs manifest`);
-  state.handoff.stepIndex++;
-}
+const skills = wf.steps.map((step) => step.skill);
+for (const step of wf.steps) assert(step.manifest, `step ${step.id} needs manifest`);
 
 assert(
-  skills.join(',') === 'project-scaffold,implementer,tester,loop-orchestrator',
+  skills.join(',') === 'project-scaffold,implementer,tester,reviewer,loop-orchestrator',
   `scaffold chain: ${skills.join(',')}`
 );
 

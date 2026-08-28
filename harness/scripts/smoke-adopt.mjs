@@ -29,7 +29,9 @@ const required = [
   '.loop-forge-origin.yaml',
   'harness/workflows/round-cycle.yaml',
   'harness/scripts/loop.mjs',
+  'harness/review/run-review.mjs',
   'scripts/verify-loop.mjs',
+  'REVIEW_PROMPT.md',
   'project.yaml',
 ];
 for (const f of required) {
@@ -38,6 +40,9 @@ for (const f of required) {
 
 const origin = readFileSync(join(TARGET, '.loop-forge-origin.yaml'), 'utf8');
 if (!origin.includes('mode: adopt')) throw new Error('origin marker missing mode: adopt');
+
+const pkg = JSON.parse(readFileSync(join(TARGET, 'package.json'), 'utf8'));
+if (!pkg.scripts?.review) throw new Error('adopt should add review script');
 
 rmSync(TARGET, { recursive: true, force: true });
 console.log('\n✓ smoke:adopt passed');

@@ -18,6 +18,7 @@
 | 00 Intent | plan | project-scaffold |
 | 02 Action | copy | implementer |
 | 03 Observation | verify | tester |
+| 03 Observation | review | reviewer |
 | 04 Adjustment | adjust | loop-orchestrator |
 
 ## Intent 检查清单
@@ -59,6 +60,12 @@ node harness/scripts/loop.mjs doctor
 ```
 
 **禁止模型自评** — 以退出码为准。
+
+若通过 workflow 接力孵化，先绑定目标根目录；执行器会在 copy/verify 步骤运行受控 gate，并在 verify 后检查必备产物：
+
+```bash
+pnpm loop workflow use scaffold-project --target-root <target_root>
+```
 
 ## Adjustment
 

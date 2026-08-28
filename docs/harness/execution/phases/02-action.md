@@ -9,7 +9,7 @@
 1. `pnpm loop next` — 获取当前角色 handoff
 2. 仅扮演该 Skill 角色
 3. 最小可逆变更；尊重现有代码模式
-4. `pnpm loop handoff complete` — 触发 postflight
+4. `pnpm loop handoff complete --maker-session <session-id>` — 记录 Maker 身份并推进；验证 gate 由 Observation 执行
 
 ## 并行
 
@@ -23,5 +23,5 @@
 
 ## 禁止
 
-- 未跑 verify 就 handoff complete
+- 没有 Maker session 就 handoff complete
 - 大范围推测性重写

@@ -58,7 +58,7 @@ pnpm smoke:scaffold     # scaffold-project v2
 pnpm smoke:cloud-loop   # L4 SDK dry-run
 ```
 
-## 五层联动
+## 六层控制契约
 
 改 Skill / workflow / manifest / 文档任意一层 → 对照 [`harness/layer-sync-contract.md`](./harness/layer-sync-contract.md) 检查表。
 

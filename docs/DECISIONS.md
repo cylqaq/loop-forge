@@ -37,6 +37,9 @@
 | D-021 | L4 cloud-loop dry-run 默认 | [D-021](./decisions/D-021-cloud-loop-dry-run.md) |
 | D-022 | 母版进入等待期（v0.7.0） | [D-022](./decisions/D-022-waiting-period.md) |
 | D-023 | 决策热账本 + 冷 ADR（Decision Ledger） | [D-023](./decisions/D-023-decisions-ledger.md) |
+| D-024 | 可执行状态迁移、allowlist gate 与 Maker-Checker 回执 | [D-024](./decisions/D-024-executable-harness-transitions.md) |
+| D-025 | 控制契约 C0–C5 与披露层 D0–D3 分离 | [D-025](./decisions/D-025-control-and-disclosure-namespaces.md) |
+| D-026 | 项目 capability profile 受限适配验证 gate | [D-026](./decisions/D-026-project-capability-profile.md) |
 
 ## 已超越 / 历史索引
 

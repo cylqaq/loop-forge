@@ -1,56 +1,19 @@
-# CURRENT · Round 8 完成 · 等待期 · 封版 v0.8.0
+# CURRENT · Round 10 完成 · Capability-aware Harness 基线
 
-> 单窗口迭代：**上轮摘要 + 下轮占位**。  
-> **状态**：母版 **v0.8.0 文档封版**；主动迭代暂停，待新技能/架构理念沉淀后再开 Round 9。
+> **状态：等待新知识。** 当前没有活跃实施目标；不因例行检查自行开启新 Round。
 
 ## 上轮摘要
 
-**Round 8 · 2026-07-16 · Decision Ledger（热账本 + 冷 ADR）**
+Round 10 以三个真实叶子项目验证了 Round 9 的执行 Harness：
 
-- **`docs/DECISIONS.md`** 改为热路径索引（≤8KB）；完整条目迁入 `docs/decisions/D-NNN-*.md`
-- **D-023**：决策热冷分层；冷正文仅追加；超越更新热表状态
-- **`context-budget.yaml`** 增加 `decisions.*`；review 规则 `decisions-ledger` 门禁体积与 1:1 索引
-- **模板**：`_template` 同步热 stub + `docs/decisions/`
-- **封版**：README / AGENTS / 路由 / 文档规范对齐；`pnpm verify` exit 0 ✅
+- `app-demo`：pnpm，`verify`、`review`、`smoke:all` 完整可用；狗狗币盲盒 D-066 已完成代码门禁。
+- `knowledge-base`：npm，`verify` 与 `review` 可用，不伪造 smoke；D-068 继续保持受控发布边界。
+- `stormeye-ai`：pnpm，`verify` 与 `review` 可用，不伪造 smoke；Round 27 的业务状态保持不变。
 
-## 下轮占位 · 等待期（非活跃）
+由此新增 D-026：`harness/project-capabilities.yaml` 仅声明 `npm`/`pnpm` 与 allowlisted gate，执行器只派生固定的 `run verify` / `run review`，不给 YAML 任意 shell 权限。模板与三个叶子项目均已采用可执行的 Observation → Review → Adjustment、绑定 runId 的审查回执、profile-aware gate 与 zero-LLM review。
 
-> 无预设 Round 9 任务。当你学会新的有用技能、MCP 集成或架构理念时，在此写下轮目标并重启迭代。
+## 下轮占位（静默等待）
 
-### 触发条件（任选）
+仅在出现新的、可复核的跨项目能力差异或失败轨迹时，才新建 Round；届时先以真实项目 profile 与验证证据定义窄目标，不直接假设所有项目具有相同的命令或 smoke 能力。
 
-- 新 Skill / MCP / Automation 模式值得母版化
-- 子项目回流通用 harness 改进（经 `sync-template` 手动合并）
-- Cursor SDK / cloud-loop 需 live 模式生产化
-- 已 adopt 子项目迁移旧单体 DECISIONS 的辅助脚本
-
-### 重启时拟措施（模板）
-
-1. 读 `DECISIONS.md` 热账本 + 相关冷 ADR + `ARCHITECTURE.md`，确认不推翻既有 D-NNN
-2. 在此节写下 Round N 目标、拟措施、风险
-3. 实现 → `pnpm verify` → 冷 ADR + 热表 → 合并 develop → main → 打标签
-
-### 验收标准
-
-```bash
-pnpm verify
-pnpm smoke:all
-```
-
----
-
-## 历史
-
-### Round 7 · L4 SDK 闭环 + adopt · v0.7.0
-
-### Round 6 · adopt + 模板自洽 · v0.5.0
-
-### Round 5 · 外部孵化 + scaffold v2 · v0.4.0
-
-### Round 4 · MCP Triage + ci-fix · v0.3.0
-
-### Round 3 · init + skill-author · v0.2.0
-
-### Round 2 · Git 标准化
-
-### Round 1 · 骨架
+验收标准：任何新 Round 须以 `pnpm verify`、`pnpm smoke:all` 与独立 Reviewer 的批准回执收口。

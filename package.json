@@ -8,6 +8,8 @@
     "loop": "node harness/scripts/loop.mjs",
     "verify": "node scripts/verify.mjs",
     "smoke:all": "node harness/scripts/smoke-all.mjs",
+    "smoke:state-machine": "node harness/scripts/smoke-state-machine.mjs",
+    "smoke:capabilities": "node harness/scripts/smoke-project-capabilities.mjs",
     "smoke:init": "node harness/scripts/smoke-init.mjs",
     "smoke:ci-fix": "node harness/scripts/smoke-ci-fix.mjs",
     "smoke:scaffold": "node harness/scripts/smoke-scaffold-project.mjs",

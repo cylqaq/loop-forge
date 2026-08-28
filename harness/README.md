@@ -19,8 +19,10 @@ harness/
 ```bash
 pnpm loop doctor
 pnpm loop next
-pnpm loop handoff complete
+pnpm loop handoff complete --maker-session <id>
+pnpm loop handoff complete --reviewer-session <id>
 pnpm loop workflow validate
+pnpm smoke:state-machine
 pnpm loop manifest round-start
 pnpm loop init [path]
 ```

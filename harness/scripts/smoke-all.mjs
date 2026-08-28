@@ -3,14 +3,11 @@
  * Zero-LLM smoke tests for Loop Forge harness
  */
 import { execSync } from 'node:child_process';
-import { existsSync, unlinkSync } from 'node:fs';
+import { mkdtempSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import {
-  loadLoopState,
-  saveLoopState,
-  getNextHandoff,
-  completeHandoff,
   validateWorkflows,
   doctor,
 } from './loop-lib.mjs';
@@ -28,29 +25,20 @@ assert(d.checks.every((c) => c.ok), 'doctor checks failed');
 console.log('=== smoke: workflow validate ===');
 assert(validateWorkflows().length === 0, 'workflow validation failed');
 
-console.log('=== smoke: handoff cycle ===');
-const statePath = join(ROOT, 'state/loop-state.json');
-const hadState = existsSync(statePath);
-const backup = hadState ? loadLoopState() : null;
-
-const state = loadLoopState();
-state.handoff = { workflow: 'round-cycle', stepIndex: 0, activeSkill: null };
-state.status = 'running';
-saveLoopState(state);
-
-const h1 = getNextHandoff(loadLoopState());
-assert(h1.skill === 'loop-orchestrator', 'first step should be loop-orchestrator');
-assert(!h1.done, 'workflow should not be done');
-
-completeHandoff(loadLoopState());
-const h2 = getNextHandoff(loadLoopState());
-assert(h2.skill === 'navigator', 'second step should be navigator');
-
-if (backup) {
-  saveLoopState(backup);
-} else {
-  try { unlinkSync(statePath); } catch { /* ok */ }
+console.log('=== smoke: state machine ===');
+const runtimeDir = mkdtempSync(join(tmpdir(), 'loop-forge-state-'));
+try {
+  execSync('node harness/scripts/smoke-state-machine.mjs', {
+    cwd: ROOT,
+    stdio: 'inherit',
+    env: { ...process.env, LOOP_STATE_DIR: runtimeDir },
+  });
+} finally {
+  rmSync(runtimeDir, { recursive: true, force: true });
 }
+
+console.log('=== smoke: project capabilities ===');
+execSync('node harness/scripts/smoke-project-capabilities.mjs', { cwd: ROOT, stdio: 'inherit' });
 
 console.log('=== smoke: CLI ===');
 execSync('node harness/scripts/loop.mjs doctor', { cwd: ROOT, stdio: 'pipe' });

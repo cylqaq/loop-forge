@@ -19,10 +19,16 @@ steps:
 
   - id: verify
     skill: tester
-    manifest: round-close
+    manifest: round-observe
     description: 重跑 verify 直到通过
+
+  - id: review
+    skill: reviewer
+    manifest: round-review
+    description: 独立审查修复与 verify 结果
 
 goal:
   success_condition: "pnpm verify exit 0"
+  completion_gate: review
   max_iterations: 10
   checker: reviewer

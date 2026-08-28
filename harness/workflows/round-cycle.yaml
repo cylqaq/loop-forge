@@ -23,15 +23,21 @@ steps:
 
   - id: observe
     skill: tester
-    manifest: round-close
+    manifest: round-observe
     phase: 03-observation
-    description: 跑 verify/smoke
+    description: 执行 allowlisted verify gate，记录客观结果
+
+  - id: review
+    skill: reviewer
+    manifest: round-review
+    phase: 03-observation
+    description: 独立会话审查；写入绑定本次 run 的 APPROVED 回执
 
   - id: adjust
     skill: loop-orchestrator
-    manifest: round-close
+    manifest: round-adjust
     phase: 04-adjustment
-    description: 更新 CURRENT、决策账本（热/冷）、loop-state
+    description: 消费 APPROVED 回执，更新 CURRENT、决策账本（热/冷）、loop-state
 
 handoff:
   protocol: one_skill_per_session

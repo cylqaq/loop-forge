@@ -53,32 +53,39 @@ Perceive → Reason → Act → Observe → (repeat)
 
 | Harness | 路径 | 职责 |
 |---------|------|------|
-| **文档 Harness** | `docs/**` | 人类/Agent 读序、边界、产品域链 |
-| **执行 Harness** | `harness/**` | workflow、manifest、CLI、review、smoke |
+| **Context / Knowledge Harness** | `docs/**` | 人类/Agent 读序、边界、决策、领域知识 |
+| **执行 Harness** | `harness/**` | workflow、manifest、CLI、状态、sandbox 边界 |
+| **Evaluation Harness**（执行 Harness 子系统） | `harness/review/`、`smoke-*` | deterministic gate、行为回归、轨迹/状态断言 |
 
-**原则**：Agent 不靠对话记忆，靠 `pnpm loop manifest` 列出读序。
+**原则**：Agent 不靠对话记忆，靠 `pnpm loop manifest` 列出读序；执行是否完成由 gate、回执与状态迁移决定，不由模型自评决定。
 
-## 4. 五层联动契约（L0–L5）
+### 3.1 项目能力画像
+
+叶子项目必须以 `harness/project-capabilities.yaml` 声明包管理器与可用 gate。它只允许选择 `npm` 或 `pnpm`，并声明 `verify`、`review` 与可选 `smoke_all`；执行器据此生成固定的 `run <script>` 命令。Workflow/manifest 仍只能引用 allowlisted gate，画像**不能**声明任意可执行文件、参数或 shell 片段。
+
+这样，母版能安全适配不同项目的验证能力，而不会把 `pnpm`、`smoke:all` 或 review runner 的存在当作全局事实。
+
+## 4. 六层控制契约（C0–C5）
 
 详见 `docs/harness/layer-sync-contract.md`。
 
 | 层 | 管什么 | 真相源 |
 |----|--------|--------|
-| L0 INDEX | 导航页（≤6KB） | `projects/*/INDEX.yaml` |
-| L1 Skill | 角色语义 | `skills/roles/*/SKILL.md` |
-| L2 Workflow | 多 Agent 顺序 | `harness/workflows/*.yaml` |
-| L3 Manifest | 读/写文件清单 | `harness/manifests/*.yaml` |
-| L4 执行文档 | 阶段细则 | `docs/harness/execution/` |
-| L5 架构 | 状态机、预算 | 本文 + `context-budget.yaml` |
+| C0 INDEX | 导航页（≤6KB） | `projects/*/INDEX.yaml` |
+| C1 Skill | 角色/能力语义 | `skills/roles/*/SKILL.md` |
+| C2 Workflow | 多 Agent 顺序与 gate | `harness/workflows/*.yaml` |
+| C3 Manifest | 上下文、读写、验证声明 | `harness/manifests/*.yaml` |
+| C4 执行文档 | 阶段细则 | `docs/harness/execution/` |
+| C5 架构 | 状态机、预算、事件模型 | 本文 + `context-budget.yaml` |
 
-## 5. 渐进披露（L0→L3）
+## 5. 渐进披露（D0→D3）
 
 | 层级 | 内容 |
 |------|------|
-| L0 | `AGENTS.md` — 禁止项、地图、命令 |
-| L1 | `docs/README.md` + `docs/harness/README.md` |
-| L2 | 各子目录 `README.md` |
-| L3 | PRD、契约、ADR、长文专论 |
+| D0 | `AGENTS.md` — 禁止项、地图、命令 |
+| D1 | `docs/README.md` + `docs/harness/README.md` |
+| D2 | 各子目录 `README.md` |
+| D3 | PRD、契约、ADR、长文专论 |
 
 **冲突处理**：安全优先 → 禁止项优先 → 目录就近优先。
 
@@ -92,7 +99,8 @@ Perceive → Reason → Act → Observe → (repeat)
 
 1. 结构 smoke（`smoke:all`）
 2. workflow/manifest 对齐（`loop workflow validate`）
-3. 项目级 verify（子项目自定义）
+3. 状态机行为回归（失败不推进、预算、Reviewer 回执、恢复）
+4. 项目级 verify（子项目自定义）
 
 ## 7. 子项目孵化模型
 
@@ -153,6 +161,6 @@ Perceive → Reason → Act → Observe → (repeat)
 ## 10. 关键边界
 
 - 母版 `harness/` 脚本不得依赖具体业务 DB/API
-- `state/` 运行时文件不入库（模板用 `.template`）
+- `state/` 运行时文件不入库（模板用 `.template`）；`run-events.jsonl` 为追加事实、`loop-state.json` 为当前投影、`CURRENT.md` 为人类摘要
 - 决策热冷分层（D-023）：Agent 默认只读 `DECISIONS.md` 热账本（≤8KB）；完整条目在 `docs/decisions/D-NNN-*.md`（仅追加正文）；不可静默删改历史 D 编号
 - 单窗口计划：仅 `upgrade-plans/CURRENT.md` 为活跃迭代文档

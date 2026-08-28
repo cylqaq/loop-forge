@@ -4,18 +4,24 @@
 files:
   - harness/scripts/loop-lib.mjs
   - harness/context-budget.yaml
+  - harness/project-capabilities.yaml
   - harness/workflows/round-cycle.yaml
   - harness/manifests/round-start.yaml
   - harness/manifests/round-action.yaml
   - harness/manifests/round-close.yaml
+  - harness/manifests/round-observe.yaml
+  - harness/manifests/round-review.yaml
+  - harness/manifests/round-adjust.yaml
   - harness/templates/loop-state.json.template
   - scripts/before-start.mjs
   - scripts/verify-loop.mjs
   - .cursor/mcp.json.template
+  - REVIEW_PROMPT.md
 
 dirs:
   - docs/harness
   - .cursor/skills/subagents
+  - harness/review
 
 # 子项目 verify 保持精简版，不同步 scripts/verify.mjs
 # init-lib / adopt-lib 仅母版 harness/scripts/

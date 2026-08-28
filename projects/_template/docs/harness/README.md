@@ -5,19 +5,19 @@
 ## 何时必读
 
 - 任务跨 `harness/`、`skills/`、`docs/` 多层
-- 涉及子项目孵化或五层联动变更
+- 涉及子项目孵化或六层控制契约变更
 - 不确定读哪份长文
 
 仅改单文件且熟悉规范时，读根 `AGENTS.md` + [`agent-routing.md`](./agent-routing.md) 即可。
 
-## L0→L3 层级
+## D0→D3 披露层级
 
 | 层级 | 内容 | 路径 |
 |------|------|------|
-| L0 | 铁律、地图 | [`AGENTS.md`](../../AGENTS.md) |
-| L1 | 门户 + 本文 | [`README.md`](../README.md) |
-| L2 | 子目录索引 | `execution/`、`ops/` |
-| L3 | 长文 | `ARCHITECTURE.md`、`LOOP_ENGINEERING.md` 等 |
+| D0 | 铁律、地图 | [`AGENTS.md`](../../AGENTS.md) |
+| D1 | 门户 + 本文 | [`README.md`](../README.md) |
+| D2 | 子目录索引 | `execution/`、`ops/` |
+| D3 | 长文 | `ARCHITECTURE.md`、`LOOP_ENGINEERING.md` 等 |
 
 **冲突处理**：安全 → 禁止项 → 目录就近
 

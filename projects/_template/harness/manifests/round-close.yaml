@@ -1,5 +1,5 @@
 task: round-close
-description: 观察与调整阶段
+description: Legacy combined close manifest; new workflows use round-observe/review/adjust.
 
 before:
   - path: docs/harness/execution/phases/03-observation.md
@@ -11,7 +11,9 @@ before:
 
 postflight:
   - command: pnpm verify
+    execution: external
   - command: pnpm smoke:all
+    execution: external
 
 after_must_update:
   - docs/upgrade-plans/CURRENT.md

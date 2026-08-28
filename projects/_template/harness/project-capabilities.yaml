@@ -1,0 +1,9 @@
+# Project execution profile. Commands are derived by the runner from this
+# allowlisted metadata; manifests never receive arbitrary shell authority.
+version: 1
+package_manager: pnpm
+
+gates:
+  verify: true
+  review: true
+  smoke_all: true

@@ -53,7 +53,7 @@ pnpm loop adopt --external e:\my-project\my-app my-app
 ```
 
 **adopt 不覆盖**：`AGENTS.md`、`package.json`、业务 `docs/ARCHITECTURE.md` 等。  
-**adopt 写入**：`harness/`、subagents Skills、`verify-loop.mjs`、`.loop-forge-origin.yaml`。
+**adopt 写入**：`harness/`（含 review）、subagents Skills、`REVIEW_PROMPT.md`、`verify-loop.mjs`、`.loop-forge-origin.yaml`。
 
 ### Step 3 · 子项目配置
 
@@ -109,9 +109,9 @@ gh repo create my-app --private --source=. --remote=origin --push
 ## 6. workflow 编排
 
 ```bash
-pnpm loop workflow use scaffold-project
+pnpm loop workflow use scaffold-project --target-root <target_root>
 pnpm loop next    # → project-scaffold
-# ... handoff complete × 4
+# ... handoff complete × 5（Maker/Reviewer 分别提供 session）
 ```
 
 ## 7. 故障排查

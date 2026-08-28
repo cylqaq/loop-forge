@@ -9,7 +9,7 @@
 1. `AGENTS.md`（已注入可跳过）
 2. `docs/harness/README.md`（跨域时）
 3. `pnpm loop manifest <task>` 输出的 BEFORE 列表
-4. L0 INDEX（≤6KB）— 子项目 `INDEX.yaml`
+4. C0 INDEX（≤6KB）— 子项目 `INDEX.yaml`
 
 ## Navigator 模式
 

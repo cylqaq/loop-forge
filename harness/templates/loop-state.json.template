@@ -1,11 +1,23 @@
 {
+  "version": 2,
   "currentRound": 1,
   "currentIteration": 0,
+  "handoffCount": 0,
   "maxIterations": 10,
+  "maxConsecutiveVerifyFail": 3,
+  "maxRoundsPerSession": 3,
+  "sessionRoundCount": 0,
   "status": "idle",
+  "stopReason": null,
   "goal": "",
   "consecutiveVerifyFail": 0,
   "history": [],
+  "run": {
+    "runId": null,
+    "makerSession": null
+  },
+  "targetRoot": null,
+  "completedGates": [],
   "handoff": {
     "workflow": "round-cycle",
     "stepIndex": 0,

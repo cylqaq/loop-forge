@@ -39,7 +39,7 @@ Loop Forge 是 **Loop Engineering 母版模板仓库**：
   3. 必要时小幅修订 `docs/ARCHITECTURE.md`
   4. 删除死代码与过期占位
 - 改 Skill / workflow / manifest / 文档任意一层 → 对照 `docs/harness/layer-sync-contract.md`
-- 一 Skill 一会话：先 `pnpm loop next`，完成后 `pnpm loop handoff complete`
+- 一 Skill 一会话：先 `pnpm loop next`，完成后 `pnpm loop handoff complete`；Implementer 须带 `--maker-session`，Reviewer 须带不同的 `--reviewer-session`
 
 ## 命令速查
 
@@ -47,10 +47,13 @@ Loop Forge 是 **Loop Engineering 母版模板仓库**：
 pnpm verify              # 完整验证门禁
 pnpm loop doctor         # Loop 健康检查（文档/hooks/状态）
 pnpm loop next           # 获取当前 handoff（单角色激活）
-pnpm loop handoff complete  # 完成 handoff + postflight
+pnpm loop handoff complete --maker-session <id>      # Implementer 完成 handoff
+pnpm loop handoff complete --reviewer-session <id>   # Reviewer 完成 + 写 APPROVED 回执
 pnpm loop workflow validate # L2↔L3 对齐
 pnpm loop workflow list     # 列出 workflow
 pnpm loop workflow use ci-fix  # 切换 handoff 工作流
+pnpm loop workflow use scaffold-project --target-root <path>  # 孵化目标必须绑定
+pnpm loop workflow use round-cycle --new-session --reason <why>  # 显式开始新会话并重置预算
 pnpm loop sync-template     # 母版 harness → _template
 pnpm smoke:ci-fix           # ci-fix 链 smoke校验
 pnpm smoke:all           # 零 LLM 机械 smoke
@@ -77,7 +80,7 @@ pnpm worktree create <name>  # 并行实验隔离
 docs/              # 文档 Harness（L1-L3）
   DECISIONS.md     # 决策热账本（≤8KB）
   decisions/       # 冷 ADR（D-NNN-*.md）
-  harness/         # 上下文地图 + 五层联动契约
+  harness/         # 上下文地图 + 六层控制契约
   upgrade-plans/   # CURRENT.md 单窗口迭代
 harness/           # 执行 Harness（可运行）
   scripts/         # loop.mjs CLI

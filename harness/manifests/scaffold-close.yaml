@@ -6,8 +6,7 @@ before:
     priority: critical
 
 postflight:
-  - command: npm run verify
-    cwd: "{target_root}"
+  - gate: project-verify
 
 after_must_exist:
   - "{target_root}/.loop-forge-origin.yaml"

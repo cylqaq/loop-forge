@@ -18,6 +18,7 @@ const OVERLAY_DIRS = [
   'harness/workflows',
   'harness/manifests',
   'harness/templates',
+  'harness/review',
   'docs/harness',
   '.cursor/skills/subagents',
 ];
@@ -26,11 +27,12 @@ const OVERLAY_FILES = [
   'harness/scripts/loop.mjs',
   'harness/scripts/loop-lib.mjs',
   'harness/context-budget.yaml',
+  'harness/project-capabilities.yaml',
   'scripts/verify-loop.mjs',
   'scripts/before-start.mjs',
 ];
 
-const COPY_IF_MISSING = ['INDEX.yaml', 'project.yaml', '.cursor/mcp.json.template'];
+const COPY_IF_MISSING = ['INDEX.yaml', 'project.yaml', '.cursor/mcp.json.template', 'REVIEW_PROMPT.md'];
 
 const NEVER_OVERWRITE = new Set([
   'AGENTS.md',
@@ -134,6 +136,7 @@ function mergePackageJson(dest) {
   pkg.scripts = pkg.scripts || {};
   if (!pkg.scripts.loop) pkg.scripts.loop = 'node harness/scripts/loop.mjs';
   if (!pkg.scripts.doctor) pkg.scripts.doctor = 'node harness/scripts/loop.mjs doctor';
+  if (!pkg.scripts.review) pkg.scripts.review = 'node harness/review/run-review.mjs';
   if (!pkg.scripts['verify:loop']) pkg.scripts['verify:loop'] = 'node scripts/verify-loop.mjs';
 
   const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };

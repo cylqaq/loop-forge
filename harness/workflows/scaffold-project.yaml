@@ -28,14 +28,21 @@ steps:
     phase: 03-observation
     description: Observation — 子项目 verify + doctor
 
+  - id: review
+    skill: reviewer
+    manifest: round-review
+    phase: 03-observation
+    description: 独立审查孵化结果与验证证据
+
   - id: adjust
     skill: loop-orchestrator
-    manifest: round-close
+    manifest: round-adjust
     phase: 04-adjustment
     description: Adjustment — 更新子项目 CURRENT、母版 DECISIONS（若回流）
 
 goal:
   success_condition: "sub-project npm run verify exit 0 AND .loop-forge-origin.yaml exists"
+  completion_gate: project-verify
   max_iterations: 3
   checker: reviewer
 

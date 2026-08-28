@@ -2,6 +2,8 @@ node_modules/
 .DS_Store
 *.log
 state/loop-state.json
+state/run-events.jsonl
+state/review-receipt.json
 state/*.local.json
 state/scaffold-plan.yaml
 state/DAILY_TRIAGE.md

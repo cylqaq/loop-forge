@@ -6,6 +6,7 @@ before:
     priority: critical
   - path: state/scaffold-plan.yaml
     priority: critical
+    runtime: true
 
 during_write:
   - projects/{target_id}/**
@@ -13,8 +14,7 @@ during_write:
   - .loop-forge-origin.yaml
 
 postflight:
-  - command: node harness/scripts/loop.mjs doctor
-    cwd: "{target_root}"
+  - gate: project-doctor
 
 skills:
   - implementer

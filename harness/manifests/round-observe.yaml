@@ -1,0 +1,12 @@
+task: round-observe
+description: Observation — deterministic verification gate
+
+before:
+  - path: docs/harness/execution/phases/03-observation.md
+    priority: critical
+
+postflight:
+  - gate: verify
+
+skills:
+  - tester

@@ -1,0 +1,14 @@
+task: round-review
+description: Independent Maker-Checker review with a runtime approval receipt
+
+before:
+  - path: REVIEW_PROMPT.md
+    priority: critical
+  - path: docs/harness/execution/phases/03-observation.md
+    priority: high
+
+postflight:
+  - gate: review
+
+skills:
+  - reviewer

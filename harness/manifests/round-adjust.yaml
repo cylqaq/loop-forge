@@ -1,0 +1,13 @@
+task: round-adjust
+description: Adjustment — only allowed after an approved review receipt
+
+before:
+  - path: docs/harness/execution/phases/04-adjustment.md
+    priority: critical
+
+after_must_update:
+  - docs/upgrade-plans/CURRENT.md
+  - state/loop-state.json
+
+skills:
+  - loop-orchestrator

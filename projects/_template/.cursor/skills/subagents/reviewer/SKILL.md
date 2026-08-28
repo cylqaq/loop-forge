@@ -17,6 +17,7 @@ Maker-Checker 中的 **Checker**。与 implementer **不同会话**。
 2. 跑 `pnpm verify`
 3. 对照 `docs/DECISIONS.md`（热账本）与按需冷 ADR、ARCHITECTURE 边界
 4. 输出 **APPROVED** 或 **REJECTED**（含具体理由）
+5. APPROVED 后运行 `pnpm loop handoff complete --reviewer-session <独立会话ID> --reviewed-revision <sha或working-tree>` 写入回执
 
 ## 禁止
 

@@ -4,7 +4,7 @@
 
 1. `pnpm loop next` — 只激活一个角色
 2. 本会话**仅**扮演该 Skill
-3. `pnpm loop handoff complete` — postflight
+3. `pnpm loop handoff complete` — 仅在当前角色已激活时推进；Implementer/Reviewer 分别附带 session 证据，gate 在 Observation/Review 运行
 4. 新会话再 `pnpm loop next`
 
 ## 顺序权威
