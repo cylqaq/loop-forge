@@ -53,7 +53,7 @@ pnpm loop adopt --external e:\my-project\my-app my-app
 ```
 
 **adopt 不覆盖**：`AGENTS.md`、`package.json`、业务 `docs/ARCHITECTURE.md` 等。  
-**adopt 写入**：`harness/`（含 review）、subagents Skills、`REVIEW_PROMPT.md`、`verify-loop.mjs`、`.loop-forge-origin.yaml`。
+**adopt 写入**：`harness/`（含 review）、subagents Skills、`REVIEW_PROMPT.md`、`verify-loop.mjs`、`.loop-forge-origin.yaml`。若目标缺少 package 或子项目文档入口，还会补齐最小 `package.json`、`AGENTS.md`、`docs/README.md`、架构/决策/CURRENT 模板、`.gitignore` 与 verify 脚本；已有文件不覆盖。
 
 ### Step 3 · 子项目配置
 

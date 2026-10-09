@@ -32,7 +32,13 @@ const OVERLAY_FILES = [
   'scripts/before-start.mjs',
 ];
 
-const COPY_IF_MISSING = ['INDEX.yaml', 'project.yaml', '.cursor/mcp.json.template', 'REVIEW_PROMPT.md'];
+const COPY_IF_MISSING = [
+  'INDEX.yaml', 'project.yaml', '.cursor/mcp.json.template', 'REVIEW_PROMPT.md',
+  'AGENTS.md', '.gitignore', 'docs/README.md', 'docs/ARCHITECTURE.md',
+  'docs/DECISIONS.md', 'docs/decisions/README.md',
+  'docs/upgrade-plans/CURRENT.md', 'docs/LOOP_ENGINEERING.md',
+  'scripts/verify.mjs', '.cursor/hooks.json', '.cursor/skills/domain-web-app/SKILL.md',
+];
 
 const NEVER_OVERWRITE = new Set([
   'AGENTS.md',
@@ -98,7 +104,7 @@ function copyDir(src, dest, destRoot, force) {
     const d = join(dest, name);
     if (statSync(s).isDirectory()) {
       copyDir(s, d, destRoot, force);
-    } else if (!shouldPreserveDest(destRoot, d) && (force || !existsSync(d))) {
+    } else if ((!shouldPreserveDest(destRoot, d) || !existsSync(d)) && (force || !existsSync(d))) {
       mkdirSync(join(d, '..'), { recursive: true });
       cpSync(s, d);
     }
@@ -107,7 +113,7 @@ function copyDir(src, dest, destRoot, force) {
 
 function copyFile(src, dest, destRoot, force) {
   if (!existsSync(src)) return;
-  if (shouldPreserveDest(destRoot, dest)) return;
+  if (shouldPreserveDest(destRoot, dest) && existsSync(dest)) return;
   if (!force && existsSync(dest)) return;
   mkdirSync(join(dest, '..'), { recursive: true });
   cpSync(src, dest);
@@ -123,6 +129,8 @@ function applyProjectYaml(dest, id) {
     return;
   }
   let y = readFileSync(path, 'utf8');
+  y = y.replace(/^id: my-project$/m, `id: ${id}`)
+    .replace(/^name: My Project$/m, `name: ${id.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}`);
   if (!/^adopted:/m.test(y)) y += '\nadopted: true\n';
   if (!/^id:/m.test(y)) y = `id: ${id}\n${y}`;
   writeFileSync(path, y);
@@ -130,7 +138,15 @@ function applyProjectYaml(dest, id) {
 
 function mergePackageJson(dest) {
   const path = join(dest, 'package.json');
-  if (!existsSync(path)) return;
+  if (!existsSync(path)) {
+    writeFileSync(path, `${JSON.stringify({
+      name: dest.split(/[/\\]/).filter(Boolean).pop(),
+      version: '0.1.0', private: true, type: 'module',
+      scripts: { verify: 'node scripts/verify.mjs' },
+      dependencies: { yaml: '^2.8.0' },
+      engines: { node: '>=20' },
+    }, null, 2)}\n`);
+  }
 
   const pkg = JSON.parse(readFileSync(path, 'utf8'));
   pkg.scripts = pkg.scripts || {};
@@ -149,6 +165,16 @@ function mergePackageJson(dest) {
   }
 
   writeFileSync(path, `${JSON.stringify(pkg, null, 2)}\n`);
+}
+
+function configureCapabilities(dest) {
+  const path = join(dest, 'harness/project-capabilities.yaml');
+  const pkg = JSON.parse(readFileSync(join(dest, 'package.json'), 'utf8'));
+  const manager = existsSync(join(dest, 'pnpm-lock.yaml')) ? 'pnpm' : 'npm';
+  let profile = readFileSync(path, 'utf8');
+  profile = profile.replace(/^package_manager: .+$/m, `package_manager: ${manager}`)
+    .replace(/^  smoke_all: .+$/m, `  smoke_all: ${Boolean(pkg.scripts?.['smoke:all'])}`);
+  writeFileSync(path, profile);
 }
 
 function migrateLoopState(dest) {
@@ -234,6 +260,7 @@ export function runAdopt({ dest, id, root, template, skipInstall, force }) {
 
   applyProjectYaml(dest, id);
   mergePackageJson(dest);
+  configureCapabilities(dest);
   migrateLoopState(dest);
   writeAdoptMarker(dest, root, id);
 

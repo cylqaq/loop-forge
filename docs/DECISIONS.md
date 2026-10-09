@@ -40,6 +40,7 @@
 | D-024 | 可执行状态迁移、allowlist gate 与 Maker-Checker 回执 | [D-024](./decisions/D-024-executable-harness-transitions.md) |
 | D-025 | 控制契约 C0–C5 与披露层 D0–D3 分离 | [D-025](./decisions/D-025-control-and-disclosure-namespaces.md) |
 | D-026 | 项目 capability profile 受限适配验证 gate | [D-026](./decisions/D-026-project-capability-profile.md) |
+| D-027 | adopt 可引导仅有 README 的仓库，补齐子项目文档入口与执行依赖 | [D-027](./decisions/D-027-bare-repository-adopt.md) |
 
 ## 已超越 / 历史索引
 
